@@ -1,13 +1,12 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import Homepage from './src/components/Homepage/Homepage.js';
+import Appointment from './src/components/Appointment/Appointment.js';
 
 export default class App extends React.Component {
   render() {
     return (
-        <View style={styles.container}>
-            <Homepage></Homepage>
-        </View>
+        <Appointment></Appointment>
     );
   }
 }
