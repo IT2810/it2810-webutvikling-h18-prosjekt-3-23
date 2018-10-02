@@ -1,21 +1,23 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
+import Homepage from './src/components/Homepage/Homepage.js';
 
 export default class App extends React.Component {
   render() {
     return (
-      <View style={styles.container}>
-        <Text>Open up App.js to start working on your app!</Text>
-      </View>
+        <View style={styles.container}>
+            <Homepage></Homepage>
+        </View>
     );
   }
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+      flex: 1,
+      backgroundColor: '#eceff1',
+      alignItems: 'center',
+      justifyContent: 'center',
+
   },
 });
