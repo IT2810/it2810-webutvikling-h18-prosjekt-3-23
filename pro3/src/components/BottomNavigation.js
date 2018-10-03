@@ -2,15 +2,16 @@ import React, {Component} from 'react';
 import { StyleSheet, ScrollView, Text, View } from 'react-native';
 import { createMaterialBottomTabNavigator } from 'react-navigation-material-bottom-tabs';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import Homepage from './Homepage/Homepage';
+
 
 //Disse skal erstattes med de faktiske sidene som skal brukes:
-import HomePageJulie from './HomePageJulie';
 import TodoPageJulie from './TodoPageJulie';
 import AppointmentsPageJulie from './AppointmentsPageJulie';
 
 //Alt med navnet Julie i seg skal endres!
 
-const HomePageRoute = () => <HomePageJulie></HomePageJulie>;
+const HomePageRoute = () => <Homepage></Homepage>;
 const TodoPageRoute = () => <TodoPageJulie></TodoPageJulie>;
 const AppointmentsPageRoute = () => <AppointmentsPageJulie></AppointmentsPageJulie>;
 

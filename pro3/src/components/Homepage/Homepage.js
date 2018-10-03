@@ -7,21 +7,20 @@ class Homepage extends React.Component {
 
     render() {
         return (
-            <View style={styles.thepage}>
+            <View style={styles.container}>
                <Score></Score>
             </View>
         );
     }
 }
 
-const styles = StyleSheet.create({
-    thepage: {
-        felx: 1,
-        backgroundColor: '#eceff1',
-        justifyContent: 'center',
-        alignItems: 'center',
-
-
-    }
-})
 export default Homepage;
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#37474f',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+});

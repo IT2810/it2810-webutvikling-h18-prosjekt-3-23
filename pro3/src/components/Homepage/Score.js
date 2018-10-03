@@ -14,10 +14,13 @@ class Score extends React.Component {
     }
 }
 
+
+export default Score;
+
 const styles = StyleSheet.create({
     scoreText: {
         fontFamily: 'HelveticaNeue-UltraLight',
-        color: '#37474f',
+        color: '#eceff1',
+        fontSize: 30,
     }
 })
-export default Score;
