@@ -8,7 +8,7 @@ class Score extends React.Component {
     render() {
         return (
             <View>
-                <Text style={styles.scoreText}>Score</Text>
+                <Text style={styles.scoreText}>Score: 142</Text>
             </View>
         );
     }
@@ -22,5 +22,6 @@ const styles = StyleSheet.create({
         fontFamily: 'HelveticaNeue-UltraLight',
         color: '#eceff1',
         fontSize: 30,
+        marginTop: 20,
     }
 })
