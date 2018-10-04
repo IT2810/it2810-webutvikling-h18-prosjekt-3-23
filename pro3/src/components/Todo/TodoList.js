@@ -58,16 +58,6 @@ export default class TodoList extends Component {
   };
 
   componentDidMount() {
-    Keyboard.addListener(
-      isAndroid ? "keyboardDidShow" : "keyboardWillShow",
-      e => this.setState({ viewPadding: e.endCoordinates.height + viewPadding })
-    );
-
-    Keyboard.addListener(
-      isAndroid ? "keyboardDidHide" : "keyboardWillHide",
-      () => this.setState({ viewPadding: viewPadding })
-    );
-
     Tasks.all(tasks => this.setState({ tasks: tasks || [] }));
   }
 
@@ -76,6 +66,15 @@ export default class TodoList extends Component {
       <View
         style={[styles.container, { paddingBottom: this.state.viewPadding }]}
       >
+      <TextInput
+          style={styles.textInput}
+          onChangeText={this.changeTextHandler}
+          onSubmitEditing={this.addTask}
+          value={this.state.text}
+          placeholder="Add Tasks"
+          returnKeyType="done"
+          returnKeyLabel="done"
+        />
         <FlatList
           style={styles.list}
           data={this.state.tasks}
@@ -89,15 +88,6 @@ export default class TodoList extends Component {
               </View>
               <View style={styles.hr} />
             </View>}
-        />
-        <TextInput
-          style={styles.textInput}
-          onChangeText={this.changeTextHandler}
-          onSubmitEditing={this.addTask}
-          value={this.state.text}
-          placeholder="Add Tasks"
-          returnKeyType="done"
-          returnKeyLabel="done"
         />
       </View>
     );
