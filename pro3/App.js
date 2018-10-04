@@ -1,12 +1,13 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import TodoPage from './src/components/Todo/TodoPage.js'
+import TodoList from './src/components/Todo/TodoList.js'
 
 export default class App extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <TodoPage></TodoPage> 
+        <Text> Lol</Text>
+        <TodoList></TodoList>
       </View>
     );
   }

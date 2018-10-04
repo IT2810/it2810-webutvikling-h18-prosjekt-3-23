@@ -1,65 +1,165 @@
-import React from 'react';
-import {Text, 
-        View,
-        TouchableOpacity,
-        StyleSheet,
-        Dimensions
-        } from 'react-native';
- 
+import React, { Component } from "react";
+import {
+  AppRegistry,
+  StyleSheet,
+  Text,
+  View,
+  FlatList,
+  AsyncStorage,
+  Button,
+  TextInput,
+  Keyboard,
+  Platform
+} from "react-native";
 
-//Source: https://blog.eduonix.com/mobile-programming/learn-build-react-native-todo-application-part-1/
-class TodoList extends React.Component {
-    
-    state = {
-        isCompletet: false
-    };
+//Source: https://gist.githubusercontent.com/ahmedam55/b10adc17c4eed1bb634cf6d934552b52/raw/6352387a68ce01f7f9230b7fae30f8c37871e129/index.js
 
-    toggleItem = () => {
-        this.setState(prevState => {
-        return{
-            isCompleted: !prevState.isCompleted
-        }
-        })
-    }
+const isAndroid = Platform.OS == "android";
+const viewPadding = 10;
 
-    render() {
-        return (
-            <View style={styles.container}>
-                <TouchableOpacity onPress={this.toggleItem}>
-                    <View style={styles.circle}/>
-                </TouchableOpacity>
-                <Text style={styles.text}> Todo List will show here</Text>
-                
-            </View>
-        );
-        }
-    }
+export default class TodoList extends Component {
+  state = {
+    tasks: [],
+    text: ""
+  };
 
-    
-    const { height, width } = Dimensions.get('window');
+  changeTextHandler = text => {
+    this.setState({ text: text });
+  };
 
-    const styles = StyleSheet.create({
-        container: {
-          width: width - 50,
-          borderBottomColor: '#bbb',
-          borderBottomWidth: StyleSheet.hairlineWidth,
-          flexDirection: 'row',
-          alignItems: 'center'
+  addTask = () => {
+    let notEmpty = this.state.text.trim().length > 0;
+
+    if (notEmpty) {
+      this.setState(
+        prevState => {
+          let { tasks, text } = prevState;
+          return {
+            tasks: tasks.concat({ key: tasks.length, text: text }),
+            text: ""
+          };
         },
-        text: {
-          fontWeight: '500',
-          fontSize: 18,
-          marginVertical: 20
-        },
-        circle: {
-          width: 30,
-          height: 30,
-          borderRadius: 15,
-          borderColor: 'red',
-          borderWidth: 3,
-          marginRight: 20
-        }
-      });
+        () => Tasks.save(this.state.tasks)
+      );
+    }
+  };
 
+  deleteTask = i => {
+    this.setState(
+      prevState => {
+        let tasks = prevState.tasks.slice();
 
-export default TodoList;
+        tasks.splice(i, 1);
+
+        return { tasks: tasks };
+      },
+      () => Tasks.save(this.state.tasks)
+    );
+  };
+
+  componentDidMount() {
+    Keyboard.addListener(
+      isAndroid ? "keyboardDidShow" : "keyboardWillShow",
+      e => this.setState({ viewPadding: e.endCoordinates.height + viewPadding })
+    );
+
+    Keyboard.addListener(
+      isAndroid ? "keyboardDidHide" : "keyboardWillHide",
+      () => this.setState({ viewPadding: viewPadding })
+    );
+
+    Tasks.all(tasks => this.setState({ tasks: tasks || [] }));
+  }
+
+  render() {
+    return (
+      <View
+        style={[styles.container, { paddingBottom: this.state.viewPadding }]}
+      >
+        <FlatList
+          style={styles.list}
+          data={this.state.tasks}
+          renderItem={({ item, index }) =>
+            <View>
+              <View style={styles.listItemCont}>
+                <Text style={styles.listItem}>
+                  {item.text}
+                </Text>
+                <Button title="X" onPress={() => this.deleteTask(index)} />
+              </View>
+              <View style={styles.hr} />
+            </View>}
+        />
+        <TextInput
+          style={styles.textInput}
+          onChangeText={this.changeTextHandler}
+          onSubmitEditing={this.addTask}
+          value={this.state.text}
+          placeholder="Add Tasks"
+          returnKeyType="done"
+          returnKeyLabel="done"
+        />
+      </View>
+    );
+  }
+}
+
+let Tasks = {
+  convertToArrayOfObject(tasks, callback) {
+    return callback(
+      tasks ? tasks.split("||").map((task, i) => ({ key: i, text: task })) : []
+    );
+  },
+  convertToStringWithSeparators(tasks) {
+    return tasks.map(task => task.text).join("||");
+  },
+  all(callback) {
+    return AsyncStorage.getItem("TASKS", (err, tasks) =>
+      this.convertToArrayOfObject(tasks, callback)
+    );
+  },
+  save(tasks) {
+    AsyncStorage.setItem("TASKS", this.convertToStringWithSeparators(tasks));
+  }
+};
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "#F5FCFF",
+    padding: viewPadding,
+    paddingTop: 20,
+    width: "80%",
+    marginTop:20,
+    marginBottom:40,
+  },
+  list: {
+    width: "100%"
+  },
+  listItem: {
+    paddingTop: 2,
+    paddingBottom: 2,
+    fontSize: 18
+  },
+  hr: {
+    height: 1,
+    backgroundColor: "gray"
+  },
+  listItemCont: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between"
+  },
+  textInput: {
+    height: 40,
+    paddingRight: 10,
+    paddingLeft: 10,
+    borderColor: "gray",
+    borderWidth: isAndroid ? 0 : 1,
+    width: "100%"
+  }
+});
+
+AppRegistry.registerComponent("TodoList", () => TodoList);
