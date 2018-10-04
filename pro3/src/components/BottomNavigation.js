@@ -10,7 +10,6 @@ import TodoPageJulie from './TodoPageJulie';
 import AppointmentsPageJulie from './AppointmentsPageJulie';
 
 //Alt med navnet Julie i seg skal endres!
-
 const HomePageRoute = () => <Homepage></Homepage>;
 const TodoPageRoute = () => <TodoPageJulie></TodoPageJulie>;
 const AppointmentsPageRoute = () => <AppointmentsPageJulie></AppointmentsPageJulie>;
