@@ -1,21 +1,20 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import TodoList from './src/components/Todo/TodoList.js'
+import BottomNavigation from './src/components/BottomNavigation.js';
 
 export default class App extends React.Component {
   render() {
     return (
-      <View style={styles.container}>
-      </View>
+        <BottomNavigation></BottomNavigation>
     );
   }
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor : '#263238'
+      flex: 1,
+      backgroundColor: '#eceff1',
+      alignItems: 'center',
+      justifyContent: 'center',
   },
 });
