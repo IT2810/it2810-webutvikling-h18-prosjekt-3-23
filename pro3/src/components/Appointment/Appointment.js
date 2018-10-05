@@ -1,58 +1,77 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-import {Agenda} from 'react-native-calendars';
+import {StyleSheet, Text, TouchableHighlight, View} from 'react-native';
+import { Card, Header, Button} from 'react-native-elements'
+
+import Icon from 'react-native-vector-icons/MaterialIcons';
+
 
 class Appointment extends React.Component {
 
+    static navigationOptions = {
+        //Setter den innebygde headeren til null fordi vi helle rlager en selv.
+        header: null,
+        //Ta bort dette om det ikke skal brukes!!
+        headerRight: (
+            <TouchableHighlight onPress={() => {this.props.navigation.navigate('NewCard')}}>
+                <Icon name = 'add' size={30} color='#eceff1'/>
+            </TouchableHighlight>
+        ),
+        title: 'My Appoinments',
+
+        headerStyle: {
+            backgroundColor: '#37474f',
+        },
+        headerTintColor: '#eceff1',
+
+    };
+
+    constructor() {
+        super()
+        this.state = { avtaler: [{navn: "edd", Klokkeslett: '12:00'}, {navn: "chillern", Klokkeslett: '12:00'}, {navn: "edd", Klokkeslett: '13:00'}]}
+    }
+
     render() {
+        const avtaleKort = this.state.avtaler.map(avtale => (
+            <Card>
+                <Text>{avtale.navn}</Text>
+                <Text>{avtale.Klokkeslett}</Text>
+                <Button
+                    color = '#eceff1'
+                    backgroundColor='#37474f'
+                    buttonStyle={{borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 0}}
+                    title='VIEW NOW' />
+            </Card>
+        ));
         return (
-            <Agenda
-                // the list of items that have to be displayed in agenda. If you want to render item as empty date
-                // the value of date key kas to be an empty array []. If there exists no value for date key it is
-                // considered that the date in question is not yet loaded
-                items={
-                    {'2018-10-15': [{text: 'item 1 - any js object'}],
-                        '2018-10-23': [{text: 'item 2 - any js object'}],
-                    }}
-                // Minimum date that can be selected, dates before minDate will be grayed out. Default = undefined
-                minDate={'2010-05-10'}
-                // Maximum date that can be selected, dates after maxDate will be grayed out. Default = undefined
-                maxDate={'2042-01-01'}
-                // Max amount of months allowed to scroll to the past. Default = 50
-                pastScrollRange={100}
-                // Max amount of months allowed to scroll to the future. Default = 50
-                futureScrollRange={100}
-                // specify how each item should be rendered in agenda
-                //renderItem={(item, firstItemInDay) => {return (<View />);}}
-                // specify how each date should be rendered. day can be undefined if the item is not first in that day.
-                //renderDay={(day, item) => {return (<View />);}}
-                // specify how empty date content with no items should be rendered
-                //renderEmptyDate={() => {return (<View />);}}
-                // specify how agenda knob should look like
-                //renderKnob={() => {return (<View />);}}
-                // specify what should be rendered instead of ActivityIndicator
-                renderEmptyData = {() => {return (<View />);}}
-                // specify your item comparison function for increased performance
-                //rowHasChanged={(r1, r2) => {return r1.text !== r2.text}}
-                // Hide knob button. Default = false
-                //hideKnob={false}
-                // By default, agenda dates are marked if they have at least one item, but you can override this if needed
-                //markedDates={{
-                    //'2012-05-16': {selected: true, marked: true},
-                    //'2012-05-17': {marked: true},
-                    //'2012-05-18': {disabled: true}
-                //}}
-                // If provided, a standard RefreshControl will be added for "Pull to Refresh" functionality. Make sure to also set the refreshing prop correctly.
-                //onRefresh={() => console.log('refreshing...')}
-                // Set this true while waiting for new data from a refresh
-                //refreshing={true}
-                // Add a custom RefreshControl component, used to provide pull-to-refresh functionality for the ScrollView.
-                //refreshControl={null}
-                // agenda container style
-                //style={{}}
-            />
+
+
+            <View>
+                <Header backgroundColor={'#37474f'}
+                    placement="left"
+                    centerComponent={{ text: 'My Appointments', style: { color: '#eceff1' } }}
+                    rightComponent={
+                        <TouchableHighlight onPress={() => {this.props.navigation.navigate('NewCard')}}>
+                        <Icon name = 'add' size={30} color='#eceff1'/>
+                        </TouchableHighlight>}>
+                </Header>
+                {avtaleKort}
+            </View>
         );
     }
+
+
 }
+
+
+const styles = StyleSheet.create({
+    Button: {
+        flex: 1,
+        backgroundColor: '#eceff1',
+        alignItems: 'center',
+        justifyContent: 'center',
+
+    },
+});
+
 
 export default Appointment;
