@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-import {StyleSheet,Text, View, FlatList, AsyncStorage, Button, TextInput,} from "react-native";
+import {StyleSheet,Text, View, FlatList, AsyncStorage, Button, TextInput, TouchableHighlight} from "react-native";
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 //Source: https://gist.githubusercontent.com/ahmedam55/b10adc17c4eed1bb634cf6d934552b52/raw/6352387a68ce01f7f9230b7fae30f8c37871e129/index.js
 
@@ -70,7 +71,7 @@ class TodoList extends Component {
           onChangeText={this.changeTextHandler}
           onSubmitEditing={this.addTask}
           value={this.state.text}
-          placeholder="Add a new task"
+          placeholder="+ Add a new task"
           returnKeyType="done"
           returnKeyLabel="done"
           placeholderTextColor="rgba(96, 125, 139, 0.631)"
@@ -84,7 +85,9 @@ class TodoList extends Component {
                 <Text style={styles.listItem}>
                   {item.text}
                 </Text>
-                <Button color="#607D8B" title="X" onPress={() => this.deleteTask(index)} />
+                <TouchableHighlight title="Delete" onPress={() => this.deleteTask(index)}>
+                  <Icon name="trash" color="#607D8B" size={24}/>
+                </TouchableHighlight>
               </View>
               <View style={styles.hr} />
             </View>}
@@ -129,9 +132,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#263238",
     padding: viewPadding,
     paddingTop: 20,
-    width: "100%",
-    marginTop:20,
-    marginBottom:40,
+    width: "100%"
   },
   list: {
     width: "100%",
@@ -139,7 +140,7 @@ const styles = StyleSheet.create({
   },
   listItem: {
     padding: 5,
-    fontSize: 22,
+    fontSize: 24,
     color: "#CFD8DC"
   },
   hr: {
@@ -154,10 +155,10 @@ const styles = StyleSheet.create({
   textInput: {
     padding: 5,
     borderColor: "#78909c",
-    borderWidth: 1.5,
+    borderWidth: 1.8,
     width: "100%",
     color: "#CFD8DC",
-    fontSize: 22,
+    fontSize: 24,
     marginBottom: 10,
     marginTop: 10
   },
