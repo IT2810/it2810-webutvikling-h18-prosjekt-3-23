@@ -6,12 +6,12 @@ import Homepage from './Homepage/Homepage';
 
 
 //Disse skal erstattes med de faktiske sidene som skal brukes:
-import TodoPageJulie from './TodoPageJulie';
+import TodoPage from './Todo/TodoPage';
 import AppointmentsPageJulie from './AppointmentsPageJulie';
 
 //Alt med navnet Julie i seg skal endres!
 const HomePageRoute = () => <Homepage></Homepage>;
-const TodoPageRoute = () => <TodoPageJulie></TodoPageJulie>;
+const TodoPageRoute = () => <TodoPage></TodoPage>;
 const AppointmentsPageRoute = () => <AppointmentsPageJulie></AppointmentsPageJulie>;
 
 /*A material-design themed tab bar on the bottom of the screen that lets you switch between different routes.
