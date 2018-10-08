@@ -1,12 +1,12 @@
 import React, {Component} from 'react';
 import { StyleSheet, Text, View } from 'react-native';
+import Geolocation from './Geolocation/Geolocation.js';
+
 //Denne siden skal vekk
 class AppointmentsPageJulie extends Component{
   render(){
     return(
-      <View style={styles.container}>
-        <Text>Avtaler på egen side wiho</Text>
-      </View>
+        <Geolocation></Geolocation>
     )
   }
 }

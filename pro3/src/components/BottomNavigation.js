@@ -3,15 +3,15 @@ import { StyleSheet, ScrollView, Text, View } from 'react-native';
 import { createMaterialBottomTabNavigator } from 'react-navigation-material-bottom-tabs';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import Homepage from './Homepage/Homepage';
+import TodoList from './Todo/TodoList';
 
 
 //Disse skal erstattes med de faktiske sidene som skal brukes:
-import TodoPageJulie from './TodoPageJulie';
 import AppointmentsPageJulie from './AppointmentsPageJulie';
 
 //Alt med navnet Julie i seg skal endres!
 const HomePageRoute = () => <Homepage></Homepage>;
-const TodoPageRoute = () => <TodoPageJulie></TodoPageJulie>;
+const TodoPageRoute = () => <TodoList></TodoList>;
 const AppointmentsPageRoute = () => <AppointmentsPageJulie></AppointmentsPageJulie>;
 
 /*A material-design themed tab bar on the bottom of the screen that lets you switch between different routes.

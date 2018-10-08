@@ -1,30 +1,50 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, Platform } from 'react-native';
+import { StyleSheet, Text, View, Platform, Dimensions } from 'react-native';
 import { Constants, Location, Permissions, MapView } from 'expo';
 import { Marker } from 'react-native-maps';
 
+const {width, height} = Dimensions.get('window')
+
+const SCREEN_HEIGHT = height
+const SCREEN_WIDTH = width
+const ASPECT_RATIO = width / height
+const LATITUDE_DELTA = 0.0922
+const LONGITUDE_DELTA = LATITUDE_DELTA * ASPECT_RATIO
+
 
 class Geolocation extends Component{
-  state = {
-    location: null,
-    errorMessage: null,
-    enableHighAccuracy: true,
-  };
+
+  constructor(){
+    super()
+
+    this.state = {
+      errorMessage: null,
+      region:{
+        latitude: 0,
+        longitude: 0,
+        latitudeDelta: 0,
+        longitudeDelta: 0
+      },
+    };
+
+  }
 
   componentWillMount() {
     if (Platform.OS === 'android' && !Constants.isDevice) {
       this.setState({
-        errorMessage: 'Error, this will not work in an Android emulator. Try it on your device!',
+        errorMessage: 'Error, this will not work in an Android emulator. Try it on a device!',
       });
     } else {
       this._getLocationAsync();
     }
   }
 
+
   componentDidMount() {
     this._getLocationAsync();
   }
 
+  /*Function asking for permission to get location, and getting it if it's not denied*/
   _getLocationAsync = async () => {
     let { status } = await Permissions.askAsync(Permissions.LOCATION);
     if (status !== 'granted') {
@@ -33,32 +53,46 @@ class Geolocation extends Component{
       });
     }
 
-    let location = await Location.getCurrentPositionAsync({});
-    this.setState({ location: JSON.stringify(location) });
+    /*Setting the state (region) to the users/device region*/
+    navigator.geolocation.getCurrentPosition((position) => {
+      let deviceLat = parseFloat(position.coords.latitude)
+      let deviceLong = parseFloat(position.coords.longitude)
+
+      let region = {
+        latitude: deviceLat,
+        longitude: deviceLong,
+        latitudeDelta: LATITUDE_DELTA,
+        longitudeDelta: LONGITUDE_DELTA
+      }
+
+      this.setState({region: region})
+    })
 
   }
 
-  render() {
-    let text = 'Waiting..';
-    if (this.state.errorMessage) {
-      text = this.state.errorMessage;
-    } else if (this.state.location) {
-      text = JSON.stringify(this.state.location);
-    }
 
+  render() {
+    console.log("REGION: "+JSON.stringify(this.state.region));
     return (
-      /*<View style={styles.container}>
-        <Text style={styles.paragraph}>{text}</Text>
-      </View>*/
-      <MapView
-        style={styles.mapStyle}
-        initialRegion={{
-          latitude: 63.446800,
-          longitude: 10.410000,
-          latitudeDelta: 0.0922,
-          longitudeDelta: 0.0421,
-          }}
-      />
+        <MapView
+          style={styles.mapStyle}
+          region = {this.state.region}
+          provider={MapView.PROVIDER_GOOGLE}
+          /*Making the users/device location visible and ability to follow when it moves*/
+          showsUserLocation={true}
+          followUserLocation={true}
+        >
+
+          /*Marker for the appointment location*/
+          <Marker
+            /*Coordinate for SiT Gløshaugen*/
+            coordinate={{
+              latitude: 63.4210583,
+              longitude: 10.4048157,
+            }}
+          />
+
+        </MapView>
     );
   }
 
@@ -69,22 +103,6 @@ export default Geolocation;
 
 const styles = StyleSheet.create({
   mapStyle:{
-    flex:1
-  },
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    paddingTop: Constants.statusBarHeight,
-    backgroundColor: '#ecf0f1',
-  },
-  paragraph: {
-    margin: 24,
-    fontSize: 18,
-    fontWeight: 'bold',
-    textAlign: 'center',
-    color: '#34495e',
+    flex:1,
   },
 });
-
-//63.446800,10.410000

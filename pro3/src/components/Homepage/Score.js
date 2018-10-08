@@ -19,7 +19,6 @@ export default Score;
 
 const styles = StyleSheet.create({
     scoreText: {
-        fontFamily: 'HelveticaNeue-UltraLight',
         color: '#eceff1',
         fontSize: 30,
         marginTop: 20,

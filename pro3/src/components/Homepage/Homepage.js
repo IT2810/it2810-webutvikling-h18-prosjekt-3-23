@@ -20,7 +20,7 @@ export default Homepage;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#37474f',
+    backgroundColor: '#263238',
     alignItems: 'center',
     justifyContent: 'center',
   },
