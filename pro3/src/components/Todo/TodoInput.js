@@ -14,6 +14,7 @@ export default class TodoInput extends Component {
                     returnKeyType="done"
                     returnKeyLabel="done"
                     placeholderTextColor="rgba(96, 125, 139, 0.631)"
+                    underlineColorAndroid='transparent'
             />
         )
     }
