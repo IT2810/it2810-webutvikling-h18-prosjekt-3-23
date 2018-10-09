@@ -8,7 +8,7 @@ class Homepage extends React.Component {
     render() {
         return (
             <View style={styles.container}>
-               <Image style={{height:180, width:220}} source={require('./logo.png')} />;
+               <Image style={{height:180, width:220}} source={require('./logo.png')} />
                <Score></Score>
             </View>
         );

@@ -5,7 +5,7 @@ import BottomNavigation from './src/components/BottomNavigation.js';
 export default class App extends React.Component {
   render() {
     return (
-        <BottomNavigation></BottomNavigation>
+          <BottomNavigation></BottomNavigation>
     );
   }
 }

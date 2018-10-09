@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-//Denne siden skal vekk
+//Denne skal slettes
 class AppointmentsPageJulie extends Component{
   render(){
     return(

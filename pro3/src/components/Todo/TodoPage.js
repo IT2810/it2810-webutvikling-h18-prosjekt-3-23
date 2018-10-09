@@ -134,7 +134,7 @@ const styles = StyleSheet.create({
     color: "#CFD8DC",
     fontSize: 24,
     marginBottom: 10,
-    marginTop: 10
+    marginTop: 10,
   },
   heading : {
     fontSize: 30,
