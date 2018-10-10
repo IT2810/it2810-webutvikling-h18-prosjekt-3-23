@@ -16,7 +16,6 @@ class Score extends React.Component {
 
 const styles = StyleSheet.create({
     scoreText: {
-        fontFamily: 'HelveticaNeue-UltraLight',
         color: '#37474f',
     }
 })

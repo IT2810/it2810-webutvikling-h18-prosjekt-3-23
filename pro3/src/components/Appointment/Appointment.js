@@ -1,5 +1,5 @@
 import React from 'react';
-import {StyleSheet, Text, TouchableHighlight, View} from 'react-native';
+import {StyleSheet, Text, TouchableHighlight, View, ScrollView} from 'react-native';
 import { Card, Button} from 'react-native-elements'
 import NewCard from './NewCard.js'
 
@@ -15,7 +15,6 @@ class Appointment extends React.Component {
                 backgroundColor: '#37474f',
             },
             headerTitleStyle: {
-                fontWeight: 'thin',
                 color: '#eceff1'
             },
             headerRight: (
@@ -33,9 +32,9 @@ class Appointment extends React.Component {
 
     createNewCard () {
         const { navigation } = this.props;
-        const title = navigation.getParam('title', null);
-        const location = navigation.getParam('location', null);
-        const dato = navigation.getParam('dato', null);
+        const title = navigation.getParam('title', "ingen data lagt inn");
+        const location = navigation.getParam('location', "ingen data lagt inn");
+        const dato = navigation.getParam('dato', "ingen data lagt inn");
         console.log(title, location, dato);
         if (title != null || location != null){
             this.state.avtaler.push({title: title, location: location, dato: dato })}
@@ -44,8 +43,8 @@ class Appointment extends React.Component {
 
     render() {
         this.createNewCard()
-        const avtaleKort = this.state.avtaler.map(avtale => (
-            <Card>
+        const avtaleKort = this.state.avtaler.map((avtale, i) => (
+            <Card key={i}>
                 <Text>{avtale.title}</Text>
                 <Text>{avtale.location}</Text>
                 <Text>{avtale.date}</Text>
@@ -57,9 +56,11 @@ class Appointment extends React.Component {
             </Card>
         ));
         return (
+            <ScrollView>
             <View>
                 {avtaleKort}
             </View>
+            </ScrollView>
         );
     }
 

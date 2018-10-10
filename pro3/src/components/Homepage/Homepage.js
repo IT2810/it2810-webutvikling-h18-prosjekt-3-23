@@ -16,7 +16,7 @@ class Homepage extends React.Component {
 
 const styles = StyleSheet.create({
     thepage: {
-        felx: 1,
+        flex: 1,
         backgroundColor: '#eceff1',
         justifyContent: 'center',
         alignItems: 'center',

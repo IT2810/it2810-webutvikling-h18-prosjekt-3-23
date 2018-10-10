@@ -1,8 +1,9 @@
 import React from 'react';
 import {StyleSheet, View, Text, TouchableHighlight, ScrollView} from 'react-native';
 import {Button} from 'react-native-elements'
-import t from 'tcomb-form-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import GenerateForm from 'react-native-form-builder';
+
 
 
 const Form = t.form.Form;
@@ -13,13 +14,13 @@ const CardInfo = t.struct({
     Dato: t.Date,
 });
 
-class NewCard extends React.Component {
+class NewCards extends React.Component {
     constructor(){
         super()
 
         this.state = {title: "edd", location: 'her', date: Date}
 
-        }
+    }
 
 
     static navigationOptions = ({navigation}) => {
@@ -83,4 +84,4 @@ const styles = StyleSheet.create({
 });
 
 
-export default NewCard;
+export default NewCards;
