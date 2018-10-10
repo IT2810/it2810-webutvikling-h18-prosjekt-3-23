@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import Geolocation from './Geolocation/Geolocation.js';
 
-//Denne siden skal vekk
 class AppointmentsPageJulie extends Component{
   render(){
     return(

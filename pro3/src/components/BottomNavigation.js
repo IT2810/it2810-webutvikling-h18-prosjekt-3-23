@@ -6,18 +6,16 @@ import Homepage from './Homepage/Homepage';
 import TodoList from './Todo/TodoList';
 
 
-//Disse skal erstattes med de faktiske sidene som skal brukes:
 import AppointmentsPageJulie from './AppointmentsPageJulie';
 
-//Alt med navnet Julie i seg skal endres!
+//Routes to the different pages/screens
 const HomePageRoute = () => <Homepage></Homepage>;
 const TodoPageRoute = () => <TodoList></TodoList>;
 const AppointmentsPageRoute = () => <AppointmentsPageJulie></AppointmentsPageJulie>;
 
-/*A material-design themed tab bar on the bottom of the screen that lets you switch between different routes.
-  https://reactnavigation.org/docs/en/material-bottom-tab-navigator.html */
+/*A material-design themed tab bar on the bottom of the screen that lets you switch between different routes.*/
 export default createMaterialBottomTabNavigator ({
-    /*Route configurations*/
+    //Route configurations
     Home:{screen: HomePageRoute,
       navigationOptions:{
         tabBarLable: 'Home',
@@ -43,7 +41,7 @@ export default createMaterialBottomTabNavigator ({
       }
     }
   },{
-    /*Navigator configurations*/
+    //Navigator configurations
     initialRouteName:'Home',
     activeTintColor: '#263238',
     inactiveColor: '#b0bec5',
