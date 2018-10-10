@@ -1,38 +1,84 @@
 import React from 'react';
-import {StyleSheet, Text, TouchableHighlight, View} from 'react-native';
-import {Header} from "react-native-elements";
-
+import {StyleSheet, View, Text, TouchableHighlight} from 'react-native';
+import {Button} from 'react-native-elements'
+import t from 'tcomb-form-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
 
+const Form = t.form.Form;
+
+const CardInfo = t.struct({
+    Title: t.String,
+    Location: t.String,
+    Dato: t.Date,
+});
+
 class NewCard extends React.Component {
+    constructor(){
+        super()
+
+        this.state = {title: "edd", location: 'her', date: Date}
+
+        }
 
 
-    static navigationOptions ={
-        //Setter den innebygde headeren til null fordi vi helle rlager en selv.
-        header: null
-    }
+    static navigationOptions = ({navigation}) => {
+        return {
+            title: 'New Appoinment',
+            headerTintColor: '#eceff1',
+            headerStyle: {
+                backgroundColor: '#37474f',
+            },
+            headerTitleStyle: {
+                fontWeight: 'thin',
+                color: '#eceff1'
+            },
+            headerLeft: (
+                <TouchableHighlight onPress={() => {navigation.navigate('AppointmentScreen')}}>
+                    <Icon name = 'add' size={30} color='#eceff1'/>
+                </TouchableHighlight>
+            )
+        }
+    };
+
+    handleSubmit = () => {
+        const value = this._form.getValue(); // use that ref to get the form value
+        console.log('value: ', value);
+        this.setState({title: value.Title, location: value.Location, date: value.Dato})
+        this.props.navigation.navigate('AppointmentScreen', {
+            title: value.Title, location: value.Location, date: value.Dato
+        })
+        console.log('Print state' + JSON.stringify(this.state));
+
+    };
+
 
     render() {
+        //console.log(this.state)
+        //console.log(this.props)
         return (
-            <View>
-                <Header backgroundColor={'#37474f'}
-                        placement="left"
-                        centerComponent={{ text: 'Create New Appointment', style: { color: '#eceff1' } }}
-                        leftComponent={<TouchableHighlight onPress={() => {this.props.navigation.navigate('AppointmentScreen')}}>
-                            <Icon name = 'chevron-left' size={30} color='#eceff1'/>
-                        </TouchableHighlight>}>
-
-                </Header>
-            </View>
+                <View style={styles.container}>
+                    <Form ref={c => this._form = c}
+                          type={CardInfo}/>
+                    <Button
+                        color = '#eceff1'
+                        backgroundColor='#37474f'
+                        buttonStyle={{borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 0}}
+                        title='Save'
+                        onPress={this.handleSubmit}
+                    />
+                </View>
         );
     }
 }
-
 const styles = StyleSheet.create({
-    scoreText: {
-        fontFamily: 'HelveticaNeue-UltraLight',
-        color: '#37474f',
+    container: {
+        justifyContent: 'center',
+        marginTop: 50,
+        padding: 20,
+        backgroundColor: '#eceff1',
     }
-})
+});
+
+
 export default NewCard;

@@ -1,40 +1,54 @@
 import React from 'react';
 import {StyleSheet, Text, TouchableHighlight, View} from 'react-native';
-import { Card, Header, Button} from 'react-native-elements'
+import { Card, Button} from 'react-native-elements'
+import NewCard from './NewCard.js'
 
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
 
 class Appointment extends React.Component {
 
-    static navigationOptions = {
-        //Setter den innebygde headeren til null fordi vi helle rlager en selv.
-        header: null,
-        //Ta bort dette om det ikke skal brukes!!
-        headerRight: (
-            <TouchableHighlight onPress={() => {this.props.navigation.navigate('NewCard')}}>
-                <Icon name = 'add' size={30} color='#eceff1'/>
-            </TouchableHighlight>
-        ),
-        title: 'My Appoinments',
-
-        headerStyle: {
-            backgroundColor: '#37474f',
-        },
-        headerTintColor: '#eceff1',
-
-    };
+    static navigationOptions = ({navigation}) => {
+        return {
+            title: 'My Appoinments',
+            headerStyle: {
+                backgroundColor: '#37474f',
+            },
+            headerTitleStyle: {
+                fontWeight: 'thin',
+                color: '#eceff1'
+            },
+            headerRight: (
+                <TouchableHighlight onPress={() => {navigation.navigate('NewCard')}}>
+                    <Icon name = 'add' size={30} color='#eceff1'/>
+                </TouchableHighlight>
+            )
+            }
+    }
 
     constructor() {
         super()
-        this.state = { avtaler: [{navn: "edd", Klokkeslett: '12:00'}, {navn: "chillern", Klokkeslett: '12:00'}, {navn: "edd", Klokkeslett: '13:00'}]}
+        this.state = { avtaler: [{title: "edd", location: 'her', date: 'Datoen'}, {title: "chillern", location: 'her', date: 'Datoen'}]}
+    }
+
+    createNewCard () {
+        const { navigation } = this.props;
+        const title = navigation.getParam('title', null);
+        const location = navigation.getParam('location', null);
+        const dato = navigation.getParam('dato', null);
+        console.log(title, location, dato);
+        if (title != null || location != null){
+            this.state.avtaler.push({title: title, location: location, dato: dato })}
+
     }
 
     render() {
+        this.createNewCard()
         const avtaleKort = this.state.avtaler.map(avtale => (
             <Card>
-                <Text>{avtale.navn}</Text>
-                <Text>{avtale.Klokkeslett}</Text>
+                <Text>{avtale.title}</Text>
+                <Text>{avtale.location}</Text>
+                <Text>{avtale.date}</Text>
                 <Button
                     color = '#eceff1'
                     backgroundColor='#37474f'
@@ -43,17 +57,7 @@ class Appointment extends React.Component {
             </Card>
         ));
         return (
-
-
             <View>
-                <Header backgroundColor={'#37474f'}
-                    placement="left"
-                    centerComponent={{ text: 'My Appointments', style: { color: '#eceff1' } }}
-                    rightComponent={
-                        <TouchableHighlight onPress={() => {this.props.navigation.navigate('NewCard')}}>
-                        <Icon name = 'add' size={30} color='#eceff1'/>
-                        </TouchableHighlight>}>
-                </Header>
                 {avtaleKort}
             </View>
         );
