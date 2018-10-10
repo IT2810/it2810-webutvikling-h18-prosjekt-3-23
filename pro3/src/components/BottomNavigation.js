@@ -6,12 +6,12 @@ import Homepage from './Homepage/Homepage';
 import TodoList from './Todo/TodoList';
 
 
-import AppointmentsPageJulie from './AppointmentsPageJulie';
+import AppStackPage from './AppStackPage';
 
 //Routes to the different pages/screens
 const HomePageRoute = () => <Homepage></Homepage>;
 const TodoPageRoute = () => <TodoList></TodoList>;
-const AppointmentsPageRoute = () => <AppointmentsPageJulie></AppointmentsPageJulie>;
+const AppointmentsPageRoute = () => <AppStackPage></AppStackPage>;
 
 /*A material-design themed tab bar on the bottom of the screen that lets you switch between different routes.*/
 export default createMaterialBottomTabNavigator ({

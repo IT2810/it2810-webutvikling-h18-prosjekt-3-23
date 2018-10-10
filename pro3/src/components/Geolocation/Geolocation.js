@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, Platform, Dimensions } from 'react-native';
+import { StyleSheet, Text, View, Platform, Dimensions, TouchableHighlight } from 'react-native';
 import { Constants, Location, Permissions, MapView } from 'expo';
 import { Marker } from 'react-native-maps';
+import Icon from 'react-native-vector-icons/MaterialIcons'
 
 //Constants for the latitudeDelta and longitudeDelta (and for calculating the longitudeDelta)
 const {width, height} = Dimensions.get('window')
@@ -69,6 +70,24 @@ class Geolocation extends Component{
     })
 
   }
+
+  static navigationOptions = ({navigation}) => {
+        return {
+            title: 'Map',
+            headerTintColor: '#eceff1',
+            headerStyle: {
+                backgroundColor: '#37474f',
+            },
+            headerTitleStyle: {
+                color: '#eceff1'
+            },
+            headerLeft: (
+                <TouchableHighlight onPress={() => {navigation.navigate('AppointmentsScreen')}}>
+                    <Icon name = 'chevron-left' size={30} color='#eceff1'/>
+                </TouchableHighlight>
+            )
+        }
+    };
 
 
   render() {
