@@ -15,8 +15,8 @@ const LONGITUDE_DELTA = LATITUDE_DELTA * ASPECT_RATIO
 
 class Geolocation extends Component{
 
-  constructor(){
-    super()
+  constructor(props){
+    super(props)
 
     this.state = {
       errorMessage: null,
@@ -26,6 +26,8 @@ class Geolocation extends Component{
         latitudeDelta: 0,
         longitudeDelta: 0
       },
+      addressLat: 0,
+      addressLng: 0,
     };
 
   }
@@ -44,9 +46,11 @@ class Geolocation extends Component{
 
   componentDidMount() {
     this._getLocationAsync();
+    this._getAddressLocationAsync();
   }
 
-  //Function asking for permission to get location, and getting it if it's not denied
+
+  //Function asking for permission to get location (of device), and getting it if it's not denied
   _getLocationAsync = async () => {
     let { status } = await Permissions.askAsync(Permissions.LOCATION);
     if (status !== 'granted') {
@@ -72,6 +76,13 @@ class Geolocation extends Component{
 
   }
 
+  //Function getting the coords for the appointment location
+  _getAddressLocationAsync = async () => {
+    const { longitude, latitude } = (await Location.geocodeAsync(this.props.address))[0];
+    this. setState({addressLat: latitude, addressLng: longitude});
+  }
+
+
   //A header with a TouchableHighlight that makes it possible to navigate back to the Appointments page
   static navigationOptions = ({navigation}) => {
         return {
@@ -94,6 +105,7 @@ class Geolocation extends Component{
 
   render() {
     console.log("REGION: "+JSON.stringify(this.state.region));
+    console.log("Stateaddress: " + this.state.addressLat +", "+ this.state.addressLng);
 
     //If it occurs an error while trying to find location, we show the errorMessage to the user and not the map
     let text = '';
@@ -116,29 +128,11 @@ class Geolocation extends Component{
         >
 
           <Marker
-            //Coordinate for SiT Gløshaugen
-            title={"Sit Gløshaugen"}
+            //Marker and coordinates for the appointment
+            title={this.props.address}
             coordinate={{
-              latitude: 63.4210583,
-              longitude: 10.4048157,
-            }}
-          />
-
-          <Marker
-            //Coordinate for SiT Portale
-            title={"Sit Portalen"}
-            coordinate={{
-              latitude: 63.4365654,
-              longitude: 10.4154334,
-            }}
-          />
-
-          <Marker
-            //Coordinate for SiT Dragvoll
-            title={"Sit Dragvoll"}
-            coordinate={{
-              latitude: 63.4069993,
-              longitude: 10.4743628,
+              latitude: this.state.addressLat,
+              longitude: this.state.addressLng,
             }}
           />
 

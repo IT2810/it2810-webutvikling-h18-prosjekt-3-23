@@ -14,7 +14,7 @@ class AppStackPage extends Component{
 
 const AppStackNavigator = createStackNavigator({
     AppointmentsScreen: AppointmentsPageJulie,
-    MapScreen: Geolocation,
+    MapScreen: (props) => <Geolocation address="Fjordgata 1 Trondheim"/>,
 });
 
 
