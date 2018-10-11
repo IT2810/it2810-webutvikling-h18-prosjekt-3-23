@@ -5,6 +5,7 @@ import t from 'tcomb-form-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
 
+
 const Form = t.form.Form;
 
 const CardInfo = t.struct({
@@ -14,12 +15,6 @@ const CardInfo = t.struct({
 });
 
 class NewCard extends React.Component {
-    constructor(){
-        super()
-
-        this.state = {title: "edd", location: 'her', date: Date}
-
-        }
 
 
     static navigationOptions = ({navigation}) => {
@@ -47,9 +42,9 @@ class NewCard extends React.Component {
         this.props.navigation.navigate('AppointmentScreen', {
             title: value.Title, location: value.Location, date: value.Dato
         })
-        console.log('Print state' + JSON.stringify(this.state));
 
     };
+
 
 
     render() {
