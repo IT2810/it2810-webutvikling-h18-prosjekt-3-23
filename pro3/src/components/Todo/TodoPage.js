@@ -2,12 +2,13 @@ import React, { Component } from "react";
 import {StyleSheet,Text, View, TextInput} from "react-native";
 import TaskManager from '../../utils/TaskManager'
 import TodoList from './TodoList'
-import TodoInput from './TodoInput'
+import TodoInput from './TodoInput';
 
 
 //Source: https://gist.githubusercontent.com/ahmedam55/b10adc17c4eed1bb634cf6d934552b52/raw/6352387a68ce01f7f9230b7fae30f8c37871e129/index.js
 
-const viewPadding = 10;
+
+
 
 export default class TodoPage extends Component {
 
@@ -54,7 +55,7 @@ export default class TodoPage extends Component {
 
   //Delete a task
   deleteTask = i => {
-    this.setState(
+     this.setState(
       prevState => {
         let tasks = prevState.tasks.slice();
         //Removes 1 element on index i
@@ -76,14 +77,16 @@ export default class TodoPage extends Component {
   render() {
     return (
       <View
-        style={[styles.container, { paddingBottom: this.state.viewPadding }]}>
+        style={styles.container}>
 
         <Text style={styles.heading}>My tasks</Text>
         <TodoInput 
                   styleTextInput={styles.textInput} 
                   changeTextHandler={this.changeTextHandler}
                   addTask={this.addTask} 
-                  text= {this.state.text}>
+                  text= {this.state.text}
+                  listTextView={styles.listTextView}
+                  listText = {styles.listText}>
         </TodoInput>
 
         <TodoList tasks={this.state.tasks} 
@@ -91,7 +94,8 @@ export default class TodoPage extends Component {
                   listItemCont={styles.listItemCont} 
                   listItem={styles.listItem} 
                   hr={styles.hr} 
-                  deleteTask={this.deleteTask} >
+                  deleteTask={this.deleteTask}
+                   >
         </TodoList>
       </View>
     );
@@ -104,7 +108,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     backgroundColor: "#263238",
-    padding: viewPadding,
+    padding: 10,
     paddingTop: 20,
     width: "100%"
   },
@@ -140,5 +144,14 @@ const styles = StyleSheet.create({
     fontSize: 30,
     color: "#CFD8DC",
     margin: 5
+  },
+  listTextView : {
+    flexDirection:"row",
+    marginBottom: 5,
+    marginTop: 5
+  },
+  listText : {
+    color: "#607D8B", 
+    fontSize: 18
   }
 });
