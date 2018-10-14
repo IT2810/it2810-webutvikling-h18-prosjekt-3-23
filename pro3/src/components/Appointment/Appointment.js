@@ -64,13 +64,18 @@ class Appointment extends React.Component {
         }
     };
 
-    async deleteCard(i){
-        const currentAppointments = this.retrieveItems()
-        for (let i = 0; i < currentAppointments.length; i++){
-            if (currentAppointments[i].id === id){
+    async deleteCard(id){
+        const currentAppointments = this.state.avtaler;
+        console.log('currentApp',currentAppointments);
+        console.log('id',id);
+        for (let i = 0; i < currentAppointments.length; i++) {
+            console.log('index', i)
+            if(i === id) {
                 currentAppointments.splice(i, 1);
+                console.log('splicde', currentAppointments)
             }
         } AsyncStorage.setItem("Appointments", JSON.stringify(currentAppointments));
+        this.retrieveItems();
 
     }
 
@@ -78,9 +83,9 @@ class Appointment extends React.Component {
         const fremtidigeAvtaler = this.state.avtaler.filter(avtale =>
             new Date(avtale.date).getTime() > new Date()
         )
-        const avtaleKort = fremtidigeAvtaler.map((avtale, i) => (
-            <Card key={i}>
-                <View style = {styles.slettKnapp}><Text>{avtale.title}</Text><TouchableHighlight onPress={() => {this.deleteCard(i)}}>
+        const avtaleKort = fremtidigeAvtaler.map((avtale, id) => (
+            <Card key={id}>
+                <View style = {styles.slettKnapp}><Text>{avtale.title}</Text><TouchableHighlight onPress={() => {this.deleteCard(id)}}>
                     <Icon name = 'delete' size={20} color='#37474f'/>
                 </TouchableHighlight></View>
                 <Text>{avtale.location}</Text>
