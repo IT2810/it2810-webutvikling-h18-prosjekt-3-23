@@ -64,13 +64,25 @@ class Appointment extends React.Component {
         }
     };
 
+    async deleteCard(i){
+        const currentAppointments = this.retrieveItems()
+        for (let i = 0; i < currentAppointments.length; i++){
+            if (currentAppointments[i].id === id){
+                currentAppointments.splice(i, 1);
+            }
+        } AsyncStorage.setItem("Appointments", JSON.stringify(currentAppointments));
+
+    }
+
     render() {
         const fremtidigeAvtaler = this.state.avtaler.filter(avtale =>
             new Date(avtale.date).getTime() > new Date()
         )
         const avtaleKort = fremtidigeAvtaler.map((avtale, i) => (
             <Card key={i}>
-                <Text>{avtale.title}</Text>
+                <View style = {styles.slettKnapp}><Text>{avtale.title}</Text><TouchableHighlight onPress={() => {this.deleteCard(i)}}>
+                    <Icon name = 'delete' size={20} color='#37474f'/>
+                </TouchableHighlight></View>
                 <Text>{avtale.location}</Text>
                 <Text>{new Date(avtale.date).toLocaleString()}</Text>
                 <Button
@@ -100,6 +112,11 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
 
     },
+    slettKnapp: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+    }
 });
 
 
