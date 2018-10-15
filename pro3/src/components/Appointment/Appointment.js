@@ -2,7 +2,8 @@ import React from 'react';
 import {AsyncStorage, ScrollView, StyleSheet, Text, TouchableHighlight, View} from 'react-native';
 import {Button, Card} from 'react-native-elements'
 import NewCard from './NewCard.js';
-
+import ScoreManager from '../../utils/ScoreManager'
+import { withNavigation } from 'react-navigation';
 
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
@@ -30,9 +31,11 @@ class Appointment extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            avtaler: []
+            avtaler: [],
+            score : 0
         }
         this.retrieveItems()
+        this.props.navigation.addListener("didFocus", () => {this.getAppScoreAsync()})
     }
 
     retrieveItems() {
@@ -41,8 +44,7 @@ class Appointment extends React.Component {
                 if(res === null){
                     AsyncStorage.setItem("Appointments", JSON.stringify([]))
                 } else {
-                    this.setState({avtaler: JSON.parse(res)})
-                }
+                    this.setState({avtaler: JSON.parse(res)})}
             })
         }catch (error) {
             console.log(error.message);
@@ -60,7 +62,13 @@ class Appointment extends React.Component {
             this.setState(
                 { avtaler: this.state.avtaler.concat([item])},() => {
                 AsyncStorage.setItem("Appointments", JSON.stringify(this.state.avtaler))
-            })
+            }
+            )
+            let oldScore = this.state.score
+            let newScore = oldScore + 1
+            this.setState({score : newScore})
+            ScoreManager.saveAppScore(newScore.toString())
+
         } catch (error) {
             console.log(error.message)
         }
@@ -68,8 +76,8 @@ class Appointment extends React.Component {
 
     async deleteCard(id){
         const currentAppointments = this.state.avtaler;
-        console.log('currentApp',currentAppointments);
-        console.log('id',id);
+        //console.log('currentApp',currentAppointments);
+        //console.log('id',id);
         for (let i = 0; i < currentAppointments.length; i++) {
             console.log('index', i)
             if(i === id) {
@@ -80,11 +88,27 @@ class Appointment extends React.Component {
             }
         } AsyncStorage.setItem("Appointments", JSON.stringify(currentAppointments));
         this.retrieveItems();
+        let oldScore = this.state.score
+        if(oldScore > 0 ){
+            let newScore = oldScore - 1
+            this.setState({score : newScore})
+            ScoreManager.saveAppScore(newScore.toString())
+        }
 
     }
 
+    getAppScoreAsync = async () => {
+        let score = await AsyncStorage.getItem("APPSCORE");
+        if (score == null) {
+          this.setState({score : 0});
+        } else {
+          let numberScore = parseInt(score)
+          this.setState({score:numberScore})
+        }
+        }
+
     render() {
-        console.log(this.state)
+        console.log("score:" + this.state.score)
         const navigation = this.props.navigation;
         const fremtidigeAvtaler = this.state.avtaler.filter(avtale =>
             new Date(avtale.date).getTime() > new Date()
@@ -132,4 +156,4 @@ const styles = StyleSheet.create({
 });
 
 
-export default Appointment;
+export default withNavigation(Appointment);

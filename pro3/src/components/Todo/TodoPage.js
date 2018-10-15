@@ -37,10 +37,8 @@ class TodoPage extends Component {
     let score = await AsyncStorage.getItem("TASKSCORE");
     if (score == null) {
       this.setState({score : 0});
-      console.log(this.state.score);
     } else {
       let numberScore = parseInt(score)
-      console.log(numberScore)
       this.setState({score:numberScore})
     }
     }
@@ -50,7 +48,7 @@ class TodoPage extends Component {
       let oldScore = this.state.score;
       newScore = oldScore + 1;
       this.setState({score: newScore})
-      ScoreManager.saveScore(newScore.toString());
+      ScoreManager.saveTaskScore(newScore.toString());
     }
 
 
