@@ -85,6 +85,7 @@ class Appointment extends React.Component {
 
     render() {
         console.log(this.state)
+        const navigation = this.props.navigation;
         const fremtidigeAvtaler = this.state.avtaler.filter(avtale =>
             new Date(avtale.date).getTime() > new Date()
         )
@@ -100,6 +101,7 @@ class Appointment extends React.Component {
                     backgroundColor='#37474f'
                     buttonStyle={{borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 0}}
                     title='VIEW MAP'
+                    onPress={() => {navigation.navigate('MapScreen')}}
                 />
             </Card>
         ));
