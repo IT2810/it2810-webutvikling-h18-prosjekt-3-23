@@ -32,8 +32,8 @@ class Geolocation extends Component{
 
   }
 
-  //Function checking if its an android emulator, because finding location dosn't work there
   componentWillMount() {
+    //Checking if its an android emulator, because finding location dosn't work there
     if (Platform.OS === 'android' && !Constants.isDevice) {
       this.setState({
         errorMessage: 'Error, finding the location of the device will not work in an Android emulator. Try it on a device!',
@@ -59,7 +59,7 @@ class Geolocation extends Component{
       });
     }
 
-    //Setting the state (region) to the users/device region
+    //Setting the state(region) to the users/device region
     navigator.geolocation.getCurrentPosition((position) => {
       let deviceLat = parseFloat(position.coords.latitude)
       let deviceLong = parseFloat(position.coords.longitude)
@@ -83,8 +83,9 @@ class Geolocation extends Component{
   }
 
 
+  //Fungerer ikke, den vil ikke ha denne headeren
   //A header with a TouchableHighlight that makes it possible to navigate back to the Appointments page
-  static navigationOptions = ({navigation}) => {
+  /*static navigationOptions = ({navigation}) => {
         return {
             title: 'Map',
             headerTintColor: '#eceff1',
@@ -100,7 +101,7 @@ class Geolocation extends Component{
                 </TouchableHighlight>
             )
         }
-    };
+    };*/
 
 
   render() {
