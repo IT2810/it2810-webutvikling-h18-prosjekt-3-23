@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import { StyleSheet, Text, View, TouchableHighlight } from 'react-native';
-import Geolocation from './Geolocation/Geolocation.js';
+import Geolocation from './Geolocation.js';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 
 //Hele denne siden skal erstattes med Heidis AppointmentsPage og NewAppointmentsPage

@@ -32,6 +32,26 @@ class Geolocation extends Component{
 
   }
 
+  //Fungerer ikke, den vil ikke ha denne headeren
+  //A header with a TouchableHighlight that makes it possible to navigate back to the Appointments page
+  /*static navigationOptions = ({navigation}) => {
+        return {
+            title: 'Map',
+            headerTintColor: '#eceff1',
+            headerStyle: {
+                backgroundColor: '#37474f',
+            },
+            headerTitleStyle: {
+                color: '#eceff1'
+            },
+            headerLeft: (
+                <TouchableHighlight onPress={() => {navigation.navigate('AppointmentsScreen')}}>
+                    <Icon name = 'chevron-left' size={30} color='#eceff1'/>
+                </TouchableHighlight>
+            )
+        }
+    };*/
+
   componentWillMount() {
     //Checking if its an android emulator, because finding location dosn't work there
     if (Platform.OS === 'android' && !Constants.isDevice) {
@@ -59,7 +79,12 @@ class Geolocation extends Component{
       });
     }
 
-    //Setting the state(region) to the users/device region
+    this.setRegion();
+
+  }
+
+  //Function setting the state(region) to the users/device region
+  setRegion(){
     navigator.geolocation.getCurrentPosition((position) => {
       let deviceLat = parseFloat(position.coords.latitude)
       let deviceLong = parseFloat(position.coords.longitude)
@@ -73,7 +98,6 @@ class Geolocation extends Component{
 
       this.setState({region: region})
     })
-
   }
 
   //Function getting the coords for the appointment location
@@ -81,27 +105,6 @@ class Geolocation extends Component{
     const { longitude, latitude } = (await Location.geocodeAsync(this.props.address))[0];
     this. setState({addressLat: latitude, addressLng: longitude});
   }
-
-
-  //Fungerer ikke, den vil ikke ha denne headeren
-  //A header with a TouchableHighlight that makes it possible to navigate back to the Appointments page
-  /*static navigationOptions = ({navigation}) => {
-        return {
-            title: 'Map',
-            headerTintColor: '#eceff1',
-            headerStyle: {
-                backgroundColor: '#37474f',
-            },
-            headerTitleStyle: {
-                color: '#eceff1'
-            },
-            headerLeft: (
-                <TouchableHighlight onPress={() => {navigation.navigate('AppointmentsScreen')}}>
-                    <Icon name = 'chevron-left' size={30} color='#eceff1'/>
-                </TouchableHighlight>
-            )
-        }
-    };*/
 
 
   render() {

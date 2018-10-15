@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import {createStackNavigator} from "react-navigation";
-import Geolocation from './Geolocation/Geolocation';
+import Geolocation from './Geolocation';
+//Skal erstattes med Heidis
 import AppointmentsPageJulie from './AppointmentsPageJulie';
 
-class AppStackPage extends Component{
+//Component for navigating between different pages in the "appointment screen"
+class AppointmentStackNav extends Component{
   render(){
     return(
       <AppStackNavigator/>
@@ -18,4 +20,4 @@ const AppStackNavigator = createStackNavigator({
 });
 
 
-export default AppStackPage;
+export default AppointmentStackNav;
