@@ -3,21 +3,19 @@ import { StyleSheet, ScrollView, Text, View } from 'react-native';
 import { createMaterialBottomTabNavigator } from 'react-navigation-material-bottom-tabs';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import Homepage from './Homepage/Homepage';
+import TodoList from './Todo/TodoList';
+import AppointmentStackNav from './AppointmentStackNav';
 
 
-//Disse skal erstattes med de faktiske sidene som skal brukes:
-import TodoPage from './Todo/TodoPage';
-import AppointmentsPageJulie from './AppointmentsPageJulie';
-
-//Alt med navnet Julie i seg skal endres!
+//Routes to the different pages/screens
 const HomePageRoute = () => <Homepage></Homepage>;
-const TodoPageRoute = () => <TodoPage></TodoPage>;
-const AppointmentsPageRoute = () => <AppointmentsPageJulie></AppointmentsPageJulie>;
+const TodoPageRoute = () => <TodoList></TodoList>;
+const AppointmentsPageRoute = () => <AppointmentStackNav></AppointmentStackNav>;
 
-/*A material-design themed tab bar on the bottom of the screen that lets you switch between different routes.
-  https://reactnavigation.org/docs/en/material-bottom-tab-navigator.html */
+
+/*A material-design themed tab bar on the bottom of the screen that lets you switch between different routes.*/
 export default createMaterialBottomTabNavigator ({
-    /*Route configurations*/
+    //Route configurations
     Home:{screen: HomePageRoute,
       navigationOptions:{
         tabBarLable: 'Home',
@@ -43,7 +41,7 @@ export default createMaterialBottomTabNavigator ({
       }
     }
   },{
-    /*Navigator configurations*/
+    //Navigator configurations
     initialRouteName:'Home',
     activeTintColor: '#263238',
     inactiveColor: '#b0bec5',
