@@ -3,6 +3,7 @@ import { StyleSheet, Text, View } from 'react-native';
 
 
 
+
 class Score extends React.Component {
 
     render() {
