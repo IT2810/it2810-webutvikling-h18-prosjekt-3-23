@@ -12,10 +12,10 @@ export default class TodoInput extends Component {
                     onChangeText={this.props.changeTextHandler}
                     onSubmitEditing={this.props.addTask}
                     value={this.props.text}
-                    placeholder="+ Add a new task"
+                    placeholder="+ Add a new todo"
                     returnKeyType="done"
                     returnKeyLabel="done"
-                    placeholderTextColor="rgba(96, 125, 139, 0.631)"
+                    placeholderTextColor="rgba(96, 125, 139, 0.731)"
                     underlineColorAndroid='transparent'
             />
             <View style = {this.props.listTextView}> 
