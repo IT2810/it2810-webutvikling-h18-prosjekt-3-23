@@ -80,6 +80,7 @@ class Appointment extends React.Component {
     }
 
     render() {
+        console.log(this.state)
         const fremtidigeAvtaler = this.state.avtaler.filter(avtale =>
             new Date(avtale.date).getTime() > new Date()
         )
