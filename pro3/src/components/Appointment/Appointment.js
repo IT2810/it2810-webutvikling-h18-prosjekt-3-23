@@ -57,8 +57,10 @@ class Appointment extends React.Component {
 
     async storeItem(item) {
         try{
-            this.setState({ avtaler: this.state.avtaler.concat([item]) })
-            AsyncStorage.setItem("Appointments", JSON.stringify(this.state.avtaler))
+            this.setState(
+                { avtaler: this.state.avtaler.concat([item])},() => {
+                AsyncStorage.setItem("Appointments", JSON.stringify(this.state.avtaler))
+            })
         } catch (error) {
             console.log(error.message)
         }
@@ -73,6 +75,8 @@ class Appointment extends React.Component {
             if(i === id) {
                 currentAppointments.splice(i, 1);
                 console.log('splicde', currentAppointments)
+                this.setState({avtaler: currentAppointments})
+                console.log('state etter delete', this.state)
             }
         } AsyncStorage.setItem("Appointments", JSON.stringify(currentAppointments));
         this.retrieveItems();

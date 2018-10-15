@@ -3,7 +3,7 @@ import {StyleSheet, View, Text, TouchableHighlight, ScrollView} from 'react-nati
 import {Button} from 'react-native-elements'
 import t from 'tcomb-form-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
-
+import moment from 'moment'
 
 
 const Form = t.form.Form;
@@ -13,6 +13,24 @@ const CardInfo = t.struct({
     Location: t.String,
     Dato: t.Date,
 });
+
+let myFormatFunction = (format,date) =>{
+    return moment(date).format(format);
+}
+
+let options = {
+    fields: {
+        Title: {error: "Fill in a title"},
+        Location: {error: "Fill inn location"},
+        Dato: {
+            mode: 'datetime',
+            config: {
+                format: (date) => myFormatFunction("DD MMM YYYY, hh:mm",date)
+            },
+            error: "Select date"
+        }
+    }
+};
 
 class NewCard extends React.Component {
 
@@ -36,14 +54,21 @@ class NewCard extends React.Component {
     };
 
     handleSubmit = () => {
-        const value = this._form.getValue(); // use that ref to get the form value
-        console.log('value: ', value);
-        this.setState({title: value.Title, location: value.Location, date: value.Dato})
-        this.props.navigation.navigate('AppointmentScreen', {
-            title: value.Title, location: value.Location, date: value.Dato
-        })
+        const value = this._form.getValue();// use that ref to get the form value
+        if (value === null){
+            return;
+        } else {
+            console.log('value: ', value);
+            this.setState({title: value.Title, location: value.Location, date: value.Dato})
+            this.props.navigation.navigate('AppointmentScreen', {
+                title: value.Title, location: value.Location, date: value.Dato
+            })
+        }
+
+
 
     };
+
 
 
 
@@ -53,8 +78,9 @@ class NewCard extends React.Component {
         return (
             <ScrollView>
                 <View style={styles.container}>
-                    <Form ref={c => this._form = c}
-                          options = {(date) => String(date)}
+                    <Form options = {options}
+
+                          ref={c => this._form = c}
                           type={CardInfo}/>
                     <Button
                         color = '#eceff1'
