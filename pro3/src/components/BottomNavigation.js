@@ -2,21 +2,15 @@ import React, {Component} from 'react';
 import { StyleSheet, ScrollView, Text, View } from 'react-native';
 import { createMaterialBottomTabNavigator } from 'react-navigation-material-bottom-tabs';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import Homepage from './Homepage/Homepage';
-import TodoList from './Todo/TodoList';
-import AppointmentStackNav from './AppointmentStackNav';
+import HomePage from './Homepage/Homepage';
+import TodoPage from './Todo/TodoPage';
+import AppStackNavigator from './AppointmentStackNav';
 
 
-//Routes to the different pages/screens
-const HomePageRoute = () => <Homepage></Homepage>;
-const TodoPageRoute = () => <TodoList></TodoList>;
-const AppointmentsPageRoute = () => <AppointmentStackNav></AppointmentStackNav>;
-
-
-/*A material-design themed tab bar on the bottom of the screen that lets you switch between different routes.*/
+/*A material-design themed tab bar on the bottom of the screen that lets you switch between different screens.*/
 export default createMaterialBottomTabNavigator ({
     //Route configurations
-    Home:{screen: HomePageRoute,
+    Home:{screen: HomePage,
       navigationOptions:{
         tabBarLable: 'Home',
         tabBarIcon:({tintColor})=>(
@@ -24,7 +18,7 @@ export default createMaterialBottomTabNavigator ({
         )
       }
     },
-    Appointments:{screen: AppointmentsPageRoute,
+    Appointments:{screen: AppStackNavigator,
       navigationOptions:{
         tabBarLable: 'Appointments',
         tabBarIcon:({tintColor})=>(
@@ -32,7 +26,7 @@ export default createMaterialBottomTabNavigator ({
         )
       }
     },
-    Todo:{screen: TodoPageRoute,
+    Todo:{screen: TodoPage,
       navigationOptions:{
         tabBarLable: 'Todo',
         tabBarIcon:({tintColor})=>(

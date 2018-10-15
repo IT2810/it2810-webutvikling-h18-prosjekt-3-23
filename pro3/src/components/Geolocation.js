@@ -34,7 +34,7 @@ class Geolocation extends Component{
 
   //Fungerer ikke, den vil ikke ha denne headeren
   //A header with a TouchableHighlight that makes it possible to navigate back to the Appointments page
-  static navigationOptions = ({navigation}) => {
+  /*static navigationOptions = ({navigation}) => {
         return {
             title: 'Map',
             headerTintColor: '#eceff1',
@@ -45,12 +45,12 @@ class Geolocation extends Component{
                 color: '#eceff1'
             },
             headerLeft: (
-                <TouchableHighlight onPress={() => {navigation.navigate('AppointmentsScreen')}}>
+                <TouchableHighlight onPress={() => {navigation.navigate('AppointmentScreen')}}>
                     <Icon name = 'chevron-left' size={30} color='#eceff1'/>
                 </TouchableHighlight>
             )
         }
-    };
+    };*/
 
   componentWillMount() {
     //Checking if its an android emulator, because finding location dosn't work there
@@ -145,7 +145,6 @@ class Geolocation extends Component{
   }
 
 }
-
 
 export default Geolocation;
 
