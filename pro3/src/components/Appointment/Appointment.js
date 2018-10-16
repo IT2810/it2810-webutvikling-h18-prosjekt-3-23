@@ -3,7 +3,6 @@ import {AsyncStorage, ScrollView, StyleSheet, Text, TouchableHighlight, View} fr
 import {Button, Card} from 'react-native-elements'
 import NewCard from './NewCard.js';
 import ScoreManager from '../../utils/ScoreManager'
-import { withNavigation } from 'react-navigation';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
 
@@ -159,4 +158,4 @@ const styles = StyleSheet.create({
 
 
 
-export default withNavigation(Appointment);
+export default Appointment;
