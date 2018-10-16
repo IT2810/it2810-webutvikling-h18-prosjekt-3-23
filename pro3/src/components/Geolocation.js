@@ -32,9 +32,8 @@ class Geolocation extends Component{
 
   }
 
-  //Fungerer ikke, den vil ikke ha denne headeren
   //A header with a TouchableHighlight that makes it possible to navigate back to the Appointments page
-  /*static navigationOptions = ({navigation}) => {
+  static navigationOptions = ({navigation}) => {
         return {
             title: 'Map',
             headerTintColor: '#eceff1',
@@ -50,7 +49,7 @@ class Geolocation extends Component{
                 </TouchableHighlight>
             )
         }
-    };*/
+    };
 
   componentWillMount() {
     //Checking if its an android emulator, because finding location dosn't work there
@@ -60,9 +59,9 @@ class Geolocation extends Component{
       });
     }else{
       this._getLocationAsync();
+      this._getAddressLocationAsync();
     }
   }
-
 
   componentDidMount() {
     this._getLocationAsync();
@@ -102,7 +101,9 @@ class Geolocation extends Component{
 
   //Function getting the coords for the appointment location
   _getAddressLocationAsync = async () => {
-    const { longitude, latitude } = (await Location.geocodeAsync(this.props.address))[0];
+    //Constant getting the address from the cards in the appointment-page
+    const appointmentLoc = this.props.navigation.state.params.address
+    const { longitude, latitude } = (await Location.geocodeAsync(appointmentLoc))[0];
     this. setState({addressLat: latitude, addressLng: longitude});
   }
 
@@ -133,7 +134,7 @@ class Geolocation extends Component{
 
           <Marker
             //Marker and coordinates for the appointment
-            title={this.props.address}
+            title={this.props.navigation.state.params.address}
             coordinate={{
               latitude: this.state.addressLat,
               longitude: this.state.addressLng,

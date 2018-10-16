@@ -9,7 +9,7 @@ import NewCard from "./Appointment/NewCard";
 const AppStackNavigator = createStackNavigator({
     AppointmentScreen: Appointment,
     NewCard: NewCard,
-    MapScreen: (props) => <Geolocation address="Fjordgata 1 Trondheim"/>,
+    MapScreen: Geolocation,
 });
 
 
