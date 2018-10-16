@@ -4,7 +4,7 @@ import TaskManager from '../../utils/TaskManager'
 import TodoList from './TodoList'
 import TodoInput from './TodoInput';
 import ScoreManager from '../../utils/ScoreManager'
-import { withNavigation } from 'react-navigation';
+
 
 
 //Source: https://gist.githubusercontent.com/ahmedam55/b10adc17c4eed1bb634cf6d934552b52/raw/6352387a68ce01f7f9230b7fae30f8c37871e129/index.js
@@ -127,7 +127,7 @@ class TodoPage extends Component {
   }
 }
 
-export default withNavigation(TodoPage)
+export default TodoPage;
 
 const styles = StyleSheet.create({
   container: {

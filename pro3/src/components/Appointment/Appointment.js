@@ -3,8 +3,6 @@ import {AsyncStorage, ScrollView, StyleSheet, Text, TouchableHighlight, View} fr
 import {Button, Card} from 'react-native-elements'
 import NewCard from './NewCard.js';
 import ScoreManager from '../../utils/ScoreManager'
-import { withNavigation } from 'react-navigation';
-
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
 
@@ -25,7 +23,7 @@ class Appointment extends React.Component {
                     <Icon name = 'add' size={30} color='#eceff1'/>
                 </TouchableHighlight>
             )
-            }
+        }
     }
 
     constructor(props) {
@@ -125,7 +123,10 @@ class Appointment extends React.Component {
                     backgroundColor='#37474f'
                     buttonStyle={{borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 0}}
                     title='VIEW MAP'
-                    onPress={() => {navigation.navigate('MapScreen')}}
+                    //Navigating to the map with the address to the appointment
+                    onPress={() => {navigation.navigate('MapScreen', {
+                      address: avtale.location
+                    })}}
                 />
             </Card>
         ));
@@ -156,4 +157,5 @@ const styles = StyleSheet.create({
 });
 
 
-export default withNavigation(Appointment);
+
+export default Appointment;
