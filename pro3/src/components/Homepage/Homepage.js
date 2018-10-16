@@ -1,6 +1,5 @@
 import React from 'react';
 import { StyleSheet, Text, View , Image, AsyncStorage, TouchableHighlight} from 'react-native';
-import { withNavigation } from 'react-navigation';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import ScoreManager from '../../utils/ScoreManager'
 
@@ -63,7 +62,7 @@ class Homepage extends React.Component {
     }
 }
 
-export default withNavigation(Homepage);
+export default Homepage;
 
 
 const styles = StyleSheet.create({
