@@ -19,7 +19,9 @@ export default class TodoInput extends Component {
                     underlineColorAndroid='transparent'
             />
             <View style = {this.props.listTextView}> 
-              <Text style = {this.props.listText}> Click on </Text> + <Icon name="check" color="#607D8B" size={18}/> + <Text style= {this.props.listText}> when task is completed</Text> 
+                <Text style = {this.props.listText}> Click on </Text>
+                <Icon name="check" color="#607D8B" size={18}/>  
+                <Text style= {this.props.listText}> when task is completed</Text> 
             </View>
             </View>
         )

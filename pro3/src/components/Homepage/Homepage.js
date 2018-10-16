@@ -20,6 +20,11 @@ class Homepage extends React.Component {
         this.props.navigation.addListener("didFocus", () => {this.retrieveAppScoreAsync()})
     }
 
+    componentDidMount(){
+        this.retrieveTaskScoreAsync()
+        this.retrieveAppScoreAsync()
+    }
+
     //Retrieves the taskScore
     retrieveTaskScoreAsync = async () => {
         let taskScore = await AsyncStorage.getItem("TASKSCORE");
@@ -46,7 +51,7 @@ class Homepage extends React.Component {
             <View style={styles.container}>
                <Image style={{height:180, width:220}} source={require('./logo.png')} />
                <View style={styles.scoreHolder}>
-                   <Text style={styles.scoreText}>Todo's completed: {this.state.taskScore}</Text>
+                   <Text style={styles.scoreText}>Todo´s completed: {this.state.taskScore}</Text>
                    <TouchableHighlight onPress={() => this.clearTaskScore()}>
                        <Icon name="times-circle" size={24} color="#607D8B"/>
                    </TouchableHighlight>
