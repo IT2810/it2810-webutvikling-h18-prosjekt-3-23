@@ -20,6 +20,11 @@ class Homepage extends React.Component {
         this.props.navigation.addListener("didFocus", () => {this.retrieveAppScoreAsync()})
     }
 
+    componentDidMount(){
+        this.retrieveTaskScoreAsync()
+        this.retrieveAppScoreAsync()
+    }
+
     //Retrieves the taskScore
     retrieveTaskScoreAsync = async () => {
         let taskScore = await AsyncStorage.getItem("TASKSCORE");
