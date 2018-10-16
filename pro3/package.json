@@ -7,7 +7,7 @@
     "android": "expo start --android",
     "ios": "expo start --ios",
     "eject": "expo eject",
-    "test": "node_modules/.bin/jest"
+    "test": "jest"
   },
   "dependencies": {
     "expo": "^30.0.1",
@@ -27,6 +27,9 @@
     "jest-expo": "^30.0.0"
   },
   "jest": {
-    "preset": "jest-expo"
+    "preset": "react-native"
+  },
+  "devDependencies": {
+    "babel-plugin-transform-object-rest-spread": "^6.26.0"
   }
 }
