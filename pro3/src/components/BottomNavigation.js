@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import { StyleSheet, ScrollView, Text, View } from 'react-native';
 import { createMaterialBottomTabNavigator } from 'react-navigation-material-bottom-tabs';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import HomePage from './Homepage/Homepage';
