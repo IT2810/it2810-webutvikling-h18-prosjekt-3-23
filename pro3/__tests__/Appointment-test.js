@@ -4,6 +4,7 @@ import renderer from 'react-test-renderer';
 import MockAsyncStorage from 'mock-async-storage';
 import { AsyncStorage as storage } from 'react-native';
 import * as jest from "react-native";
+import handleSubmit from "../src/components/Appointment/NewCard";
 
 
 const mock = () => {
@@ -11,6 +12,9 @@ const mock = () => {
     jest.mock('AsyncStorage', () => mockImpl);
 };
 
+test('storeItem exists', () => {
+    expect(Appointment.storeItem).toBeDefined();
+});
 
 
 it('Should render correctly', async  () => {
