@@ -32,7 +32,7 @@ class Appointment extends React.Component {
             avtaler: [],
             score : 0
         }
-        this.retrieveItems()
+        this.retrieveItems();
         this.props.navigation.addListener("didFocus", () => {this.getAppScoreAsync()})
     }
 

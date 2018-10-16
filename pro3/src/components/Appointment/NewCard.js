@@ -79,7 +79,6 @@ class NewCard extends React.Component {
             <ScrollView>
                 <View style={styles.container}>
                     <Form options = {options}
-
                           ref={c => this._form = c}
                           type={CardInfo}/>
                     <Button
