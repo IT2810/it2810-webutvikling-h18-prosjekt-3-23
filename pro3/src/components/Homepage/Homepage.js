@@ -11,36 +11,51 @@ class Homepage extends React.Component {
 
         this.state = {
             taskScore : 0,
-            appScore : ""
+            appScore : 0
         }
 
         this.state = {test: 0}
 
+
         this.props.navigation.addListener("didFocus", () => {this.retrieveTaskScoreAsync()})
+        this.props.navigation.addListener("didFocus", () => {this.retrieveAppScoreAsync()})
     }
 
     //Retrieves the taskScore
     retrieveTaskScoreAsync = async () => {
         let taskScore = await AsyncStorage.getItem("TASKSCORE");
-        //console.log(taskScore)
         this.setState({taskScore : taskScore});
         }
 
+    //Retrieves the appointments score
+    retrieveAppScoreAsync = async () => {
+        let appScore = await AsyncStorage.getItem("APPSCORE");
+        this.setState({appScore : appScore})
+    }
+
+    //Resets the taskScore back to zero
     clearTaskScore() {
         let score = 0
         this.setState({taskScore : score})
-        ScoreManager.saveScore(score.toString())
+        ScoreManager.saveTaskScore(score.toString())
     }
+
+
 
     render() {
         return (
             <View style={styles.container}>
                <Image style={{height:180, width:220}} source={require('./logo.png')} />
-               <View style={styles.taskScoreHolder}>
+               <View style={styles.scoreHolder}>
                    <Text style={styles.scoreText}>Todo's completed: {this.state.taskScore}</Text>
                    <TouchableHighlight onPress={() => this.clearTaskScore()}>
                        <Icon name="times-circle" size={24} color="#607D8B"/>
                    </TouchableHighlight>
+                </View>
+                <View style={styles.hr}/>
+
+                <View style={styles.scoreHolder}>
+                   <Text style={styles.scoreText}>Appointments made: {this.state.appScore}</Text>
                 </View>
                 <View style={styles.hr}/>
             </View>
@@ -62,11 +77,11 @@ const styles = StyleSheet.create({
         color: '#eceff1',
         fontSize: 24
     },
-    taskScoreHolder : {
+    scoreHolder : {
         flexDirection:"row",
         justifyContent:"space-between",
         alignItems: "center",
-        width: "65%",
+        width: "70%",
         paddingTop: 20
     },
     hr: {
