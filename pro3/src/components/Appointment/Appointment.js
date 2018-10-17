@@ -27,12 +27,12 @@ class Appointment extends React.Component {
     }
 
     constructor(props) {
-        super(props)
+        super(props);
         this.state = {
             avtaler: [],
             score : 0
         }
-        this.retrieveItems()
+        this.retrieveItems();
         this.props.navigation.addListener("didFocus", () => {this.getAppScoreAsync()})
     }
 
