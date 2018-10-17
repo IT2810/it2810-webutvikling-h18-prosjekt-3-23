@@ -7,7 +7,7 @@
     "android": "expo start --android",
     "ios": "expo start --ios",
     "eject": "expo eject",
-    "test": "node node_modules/jest/bin/jest --runInBand --watchAll"
+    "test": "node_modules/.bin/jest"
   },
   "dependencies": {
     "expo": "^30.0.1",
@@ -25,7 +25,8 @@
     "react-navigation-material-bottom-tabs": "^0.4.0",
     "react-timer-mixin": "^0.13.4",
     "jest-expo": "^30.0.0",
-    "mock-async-storage": "latest"
+    "mock-async-storage": "latest",
+    "prop-types": "latest"
   },
   "jest": {
     "preset": "jest-expo",
