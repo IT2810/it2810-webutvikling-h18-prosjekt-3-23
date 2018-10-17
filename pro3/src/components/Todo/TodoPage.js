@@ -21,6 +21,8 @@ class TodoPage extends Component {
     };
 
     this.deleteTask = this.deleteTask.bind(this);
+    //Updates the state of score everytime the TodoPage is in focus (in the navigation-menu)
+    //So that the score-counter doesn't use a wrong/not updated score 
     this.props.navigation.addListener("didFocus", () => {this.getTaskScoreAsync()})
   }
 
@@ -76,7 +78,7 @@ class TodoPage extends Component {
   };
 
 
-  //Delete a task
+  //Delete a task from the tasks-list when the complete-icon is clicked on
   deleteTask = i => {
      this.setState(
       prevState => {

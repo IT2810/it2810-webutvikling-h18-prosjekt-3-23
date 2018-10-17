@@ -122,6 +122,8 @@ class Geolocation extends Component{
       </View>);
     }
 
+    let appointmentLocation = this.props.navigation.state.params.address
+
     return (
         <MapView
           style={styles.mapStyle}
@@ -134,7 +136,7 @@ class Geolocation extends Component{
 
           <Marker
             //Marker and coordinates for the appointment
-            title={this.props.navigation.state.params.address}
+            title={appointmentLocation}
             coordinate={{
               latitude: this.state.addressLat,
               longitude: this.state.addressLng,

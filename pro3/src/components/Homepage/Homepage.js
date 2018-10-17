@@ -12,8 +12,6 @@ class Homepage extends React.Component {
             appScore : 0
         }
 
-        this.state = {test: 0}
-
 
         this.props.navigation.addListener("didFocus", () => {this.retrieveTaskScoreAsync()})
         this.props.navigation.addListener("didFocus", () => {this.retrieveAppScoreAsync()})
