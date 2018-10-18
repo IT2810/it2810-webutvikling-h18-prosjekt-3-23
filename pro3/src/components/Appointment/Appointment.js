@@ -74,8 +74,6 @@ class Appointment extends React.Component {
 
     async deleteCard(id){
         const currentAppointments = this.state.avtaler;
-        //console.log('currentApp',currentAppointments);
-        //console.log('id',id);
         for (let i = 0; i < currentAppointments.length; i++) {
             console.log('index', i)
             if(i === id) {
@@ -97,6 +95,7 @@ class Appointment extends React.Component {
 
     getAppScoreAsync = async () => {
         let score = await AsyncStorage.getItem("APPSCORE");
+        console.log("score1:" + this.state.score)
         if (score == null) {
           this.setState({score : 0});
         } else {
