@@ -62,10 +62,7 @@ class Appointment extends React.Component {
                 AsyncStorage.setItem("Appointments", JSON.stringify(this.state.avtaler))
             }
             )
-            let oldScore = this.state.score
-            let newScore = oldScore + 1
-            this.setState({score : newScore})
-            ScoreManager.saveAppScore(newScore.toString())
+            this.increaseScore();
 
         } catch (error) {
             console.log(error.message)
@@ -86,15 +83,14 @@ class Appointment extends React.Component {
             }
         } AsyncStorage.setItem("Appointments", JSON.stringify(currentAppointments));
         this.retrieveItems();
-        let oldScore = this.state.score
-        if(oldScore > 0 ){
-            let newScore = oldScore - 1
-            this.setState({score : newScore})
-            ScoreManager.saveAppScore(newScore.toString())
-        }
+        this.decreaseScore();
+        
 
     }
 
+    //The following code handles score in the appointment-page
+    
+    //Retrieves the score to be increased/decreased
     getAppScoreAsync = async () => {
         let score = await AsyncStorage.getItem("APPSCORE");
         if (score == null) {
@@ -105,8 +101,25 @@ class Appointment extends React.Component {
         }
         }
 
+    //Increases the score by 1 when appointment is made --> is called in storeItem()
+    increaseScore(){
+        let oldScore = this.state.score
+            let newScore = oldScore + 1
+            this.setState({score : newScore})
+            ScoreManager.saveAppScore(newScore.toString())
+    }
+
+    //Decreases the score by 1 when appointment is deleted --> is called in deleteCard()
+    decreaseScore(){
+        let oldScore = this.state.score
+        if(oldScore > 0 ){
+            let newScore = oldScore - 1
+            this.setState({score : newScore})
+            ScoreManager.saveAppScore(newScore.toString())
+        }
+    }
+
     render() {
-        console.log("score:" + this.state.score)
         const navigation = this.props.navigation;
         const fremtidigeAvtaler = this.state.avtaler.filter(avtale =>
             new Date(avtale.date).getTime() > new Date()
