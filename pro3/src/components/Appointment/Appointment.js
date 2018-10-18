@@ -31,11 +31,12 @@ class Appointment extends React.Component {
         this.state = {
             avtaler: [],
             score : 0
-        }
+        };
         this.retrieveItems();
         this.props.navigation.addListener("didFocus", () => {this.getAppScoreAsync()})
     }
 
+    //Retrieves all cards/appointments from asyncstorage.
     retrieveItems() {
         try{
             AsyncStorage.getItem("Appointments").then(res => {
@@ -45,7 +46,7 @@ class Appointment extends React.Component {
                     this.setState({avtaler: JSON.parse(res)})}
             })
         }catch (error) {
-            console.log(error.message);
+            console.error(error.message);
         }
     }
 
@@ -54,7 +55,7 @@ class Appointment extends React.Component {
         this.storeItem(nyAvtale)
     }
 
-
+    //Saves a new appointment(card) to asyncstorage.
     async storeItem(item) {
         try{
             this.setState(
@@ -65,27 +66,21 @@ class Appointment extends React.Component {
             this.increaseScore();
 
         } catch (error) {
-            console.log(error.message)
+            console.error(error.message)
         }
     };
 
+    //Deletes the chosen card from appointments.
     async deleteCard(id){
         const currentAppointments = this.state.avtaler;
-        //console.log('currentApp',currentAppointments);
-        //console.log('id',id);
         for (let i = 0; i < currentAppointments.length; i++) {
-            console.log('index', i)
             if(i === id) {
                 currentAppointments.splice(i, 1);
-                console.log('splicde', currentAppointments)
                 this.setState({avtaler: currentAppointments})
-                console.log('state etter delete', this.state)
             }
         } AsyncStorage.setItem("Appointments", JSON.stringify(currentAppointments));
         this.retrieveItems();
-        this.decreaseScore();
-        
-
+        this.decreaseScore(this.state.score);
     }
 
     //The following code handles score in the appointment-page
@@ -110,8 +105,7 @@ class Appointment extends React.Component {
     }
 
     //Decreases the score by 1 when appointment is deleted --> is called in deleteCard()
-    decreaseScore(){
-        let oldScore = this.state.score
+    decreaseScore(oldScore){
         if(oldScore > 0 ){
             let newScore = oldScore - 1
             this.setState({score : newScore})
