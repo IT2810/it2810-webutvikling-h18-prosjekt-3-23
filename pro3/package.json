@@ -26,7 +26,7 @@
     "react-navigation": "^2.17.0",
     "react-navigation-material-bottom-tabs": "^0.4.0",
     "react-timer-mixin": "^0.13.4",
-    "tcomb-form-native": "^0.6.19"
+    "tcomb-form-native": "^0.6.19",
   },
   "jest": {
     "preset": "jest-expo",

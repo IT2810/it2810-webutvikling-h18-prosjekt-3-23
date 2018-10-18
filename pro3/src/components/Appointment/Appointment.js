@@ -27,7 +27,7 @@ class Appointment extends React.Component {
     }
 
     constructor(props) {
-        super(props)
+        super(props);
         this.state = {
             avtaler: [],
             score : 0

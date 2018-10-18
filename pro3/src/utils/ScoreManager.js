@@ -13,7 +13,6 @@ export default ScoreManager = {
 
       saveAppScore(score) {
         try {
-            console.log("lagrer til asyncs" + score)
             AsyncStorage.setItem('APPSCORE', score);
         } catch (error) {
           // Error retrieving data
@@ -21,5 +20,4 @@ export default ScoreManager = {
         }
       }
 }
-
 

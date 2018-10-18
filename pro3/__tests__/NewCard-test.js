@@ -7,6 +7,7 @@ import jest from 'jest-mock';
 
 it('Should render correctly', () => {
     const component = renderer.create(<NewCard/>)
+    expect (component).toMatchSnapshot();
 });
 
 test('handleSubmit exists', () => {

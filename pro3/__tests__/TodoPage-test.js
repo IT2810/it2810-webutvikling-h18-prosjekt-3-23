@@ -10,12 +10,10 @@ const mock = () => {
     jest.mock('AsyncStorage', () => mockImpl);
 };
 
-it('Should render correctly', async  () => {
-    mock();
-    await storage.setItem('TASKS', '{}');
-    await storage.setItem('TASKSCORE', '{}');
-    const value1 = await storage.getItem('TASKS');
-    const value2 = await storage.getItem('TASKSCORE');
-    const component = renderer.create(<TodoPage/>)
+const navigationEx = { addListener: jest.fn() };
 
+it('renders correctly', () => {
+const tree = renderer.create(<TodoPage navigation={navigationEx}/>).toJSON();
+expect(tree).toMatchSnapshot();
+spyOn(console, 'error');
 });
