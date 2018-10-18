@@ -17,14 +17,14 @@ class TodoPage extends Component {
     this.state = {
       tasks: [],
       text: "",
-      score : 0, 
+      score : 0,
     };
 
     this.deleteTask = this.deleteTask.bind(this);
     this.props.navigation.addListener("didFocus", () => {this.getTaskScoreAsync()})
   }
 
-   
+
   //Changes the state of the text. Used in input-field in render, so change based on text-input
   changeTextHandler = text => {
     this.setState({ text: text });
@@ -91,8 +91,8 @@ class TodoPage extends Component {
     );
     this.increaseScore();
   };
-  
-  
+
+
   //Loads all task from storage
   componentDidMount() {
     TaskManager.all(tasks => this.setState({ tasks: tasks || [] }));
@@ -104,21 +104,21 @@ class TodoPage extends Component {
       <View
         style={styles.container}>
 
-        <Text style={styles.heading}>Todo's</Text>
-        <TodoInput 
-                  styleTextInput={styles.textInput} 
+        <Text style={styles.heading}>Todo´s</Text>
+        <TodoInput
+                  styleTextInput={styles.textInput}
                   changeTextHandler={this.changeTextHandler}
-                  addTask={this.addTask} 
+                  addTask={this.addTask}
                   text= {this.state.text}
                   listTextView={styles.listTextView}
                   listText = {styles.listText}>
         </TodoInput>
 
-        <TodoList tasks={this.state.tasks} 
+        <TodoList tasks={this.state.tasks}
                   listStyle={styles.list}
-                  listItemCont={styles.listItemCont} 
-                  listItem={styles.listItem} 
-                  hr={styles.hr} 
+                  listItemCont={styles.listItemCont}
+                  listItem={styles.listItem}
+                  hr={styles.hr}
                   deleteTask={this.deleteTask}
                    >
         </TodoList>
@@ -179,7 +179,7 @@ const styles = StyleSheet.create({
     marginTop: 5
   },
   listText : {
-    color: "#607D8B", 
+    color: "#607D8B",
     fontSize: 18
   }
 });
