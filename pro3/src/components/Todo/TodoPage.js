@@ -112,7 +112,7 @@ class TodoPage extends Component {
       <View
         style={styles.container}>
 
-        <Text style={styles.heading}>Todo's</Text>
+        <View style={styles.header}> <Text style={styles.heading}>My todo's</Text> </View>
         <TodoInput 
                   styleTextInput={styles.textInput} 
                   changeTextHandler={this.changeTextHandler}
@@ -145,7 +145,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     backgroundColor: "#263238",
     padding: 10,
-    paddingTop: 20,
+    paddingTop: 0,
     width: "100%"
   },
   list: {
@@ -168,7 +168,7 @@ const styles = StyleSheet.create({
   },
   textInput: {
     padding: 5,
-    borderColor: "#78909c",
+    borderColor: "#607D8B",
     borderWidth: 1.8,
     width: "100%",
     color: "#CFD8DC",
@@ -177,10 +177,11 @@ const styles = StyleSheet.create({
     marginTop: 10,
   },
   heading : {
-    fontSize: 28,
+    fontSize: 17,
     color: "#CFD8DC",
     margin: 5,
-    paddingTop: 10
+    paddingTop: 25,
+    fontWeight: "bold"
   },
   listTextView : {
     flexDirection:"row",
@@ -190,5 +191,8 @@ const styles = StyleSheet.create({
   listText : {
     color: "#607D8B", 
     fontSize: 18
+  },
+  header : {
+    height: 55
   }
 });

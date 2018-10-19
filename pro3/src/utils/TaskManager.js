@@ -14,14 +14,14 @@ export default TaskManager = {
       return tasks.map(task => task.text).join("||");
     },
   
-    all(callback) {
-      return AsyncStorage.getItem("TASKS", (err, tasks) =>
+    async all(callback) {
+      return await AsyncStorage.getItem("TASKS", (err, tasks) =>
         this.toArrayOfObject(tasks, callback)
       );
     },
   
-    save(tasks) {
-      AsyncStorage.setItem("TASKS", this.toStringWithSeparators(tasks));
+    async save(tasks) {
+      await AsyncStorage.setItem("TASKS", this.toStringWithSeparators(tasks));
     }
   };
 
