@@ -23,13 +23,6 @@ it('should render corrrectly', async () => {
     jest.unmock('AsyncStorage');
 });
 
-//Tester at asyncstorage fungerer som det skal.
-it('Mock Async Storage working', async () => {
-    await storage.setItem('Key', '12')
-    const value = await storage.getItem('Key')
-    expect(value).toBe('12')
-});
-
 describe('score', () => {
     test('setState is called when increaseScore', async () => {
         const instance = appoints.root.instance;
