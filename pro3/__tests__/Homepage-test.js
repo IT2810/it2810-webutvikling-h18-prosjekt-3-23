@@ -6,6 +6,7 @@ import MockAsyncStorage from 'mock-async-storage';
 import { AsyncStorage as storage } from 'react-native';
 
 const navigationEx = { addListener: jest.fn() };
+const homepagee = renderer.create(<Homepage navigation={navigationEx}/>);
 
 //Implements mocks
 const mock = () => {
@@ -20,8 +21,31 @@ it('should render corrrectly', async () => {
     jest.unmock('AsyncStorage');
 });
 
-it('Mock Async Storage working', async () => {
-    await storage.setItem('TASKSCORE', '5')
-    const value = await storage.getItem('TASKSCORE')
-    expect(value).toBe('5')
+
+describe('score', () => {
+    test('setState is called when clearScore', async () => {
+        const instance = homepagee.root.instance;
+        const mockSetState = jest.fn();
+        instance.setState = mockSetState;
+        instance.clearTaskScore();
+        expect(mockSetState).toHaveBeenCalled();
+        jest.unmock('AsyncStorage');
+    });
+
+    test('retrieveTaskScoreAsync should set state with no errors', () => {
+        const instance = homepagee.root.instance;
+        instance.retrieveTaskScoreAsync().then((error) => {
+            expect(error).toEqual(null);
+            expect(instance.setState()).toBeCalled();
+        });
+    });
+
+    test('retrieveAppScoreAsync should set state with no errors', () => {
+        const instance = homepagee.root.instance;
+        instance.retrieveAppScoreAsync().then((error) => {
+            expect(error).toEqual(null);
+            expect(instance.setState()).toBeCalled();
+        });
+    });
 });
+

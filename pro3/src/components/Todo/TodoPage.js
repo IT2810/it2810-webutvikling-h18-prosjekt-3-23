@@ -53,14 +53,19 @@ class TodoPage extends Component {
       ScoreManager.saveTaskScore(newScore.toString());
     }
 
+    checkIfEmpty(){
+      if(this.state.text.trim().length > 0){
+        return true;
+      }
+    }
 
 
   //Add a task
   addTask = () => {
     //Checks if a new text-input is submitted
-    let notEmpty = this.state.text.trim().length > 0;
+    //let notEmpty = this.state.text.trim().length > 0;
 
-    if (notEmpty) {
+    if (this.checkIfEmpty()) {
       this.setState(
         prevState => {
           let { tasks, text } = prevState;
@@ -92,6 +97,7 @@ class TodoPage extends Component {
       () => TaskManager.save(this.state.tasks)
     );
     this.increaseScore();
+    return true;
   };
   
   
@@ -113,7 +119,8 @@ class TodoPage extends Component {
                   addTask={this.addTask} 
                   text= {this.state.text}
                   listTextView={styles.listTextView}
-                  listText = {styles.listText}>
+                  listText = {styles.listText}
+                  >
         </TodoInput>
 
         <TodoList tasks={this.state.tasks} 
