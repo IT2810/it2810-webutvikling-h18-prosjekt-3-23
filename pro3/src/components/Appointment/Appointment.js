@@ -11,12 +11,12 @@ class Appointment extends React.Component {
     //Header navigation
     static navigationOptions = ({navigation}) => {
         return {
-            title: 'My Appoinments',
+            title: 'My Appointments',
             headerStyle: {
                 backgroundColor: '#37474f',
             },
             headerTitleStyle: {
-                color: '#eceff1'
+                color: '#cfd8dc'
             },
             headerRight: (
                 <TouchableHighlight onPress={() => {navigation.navigate('NewCard')}}>
@@ -119,16 +119,16 @@ class Appointment extends React.Component {
             new Date(avtale.date).getTime() > new Date()
         )
         const avtaleKort = fremtidigeAvtaler.map((avtale, id) => (
-            <Card key={id}>
-                <View style = {styles.slettKnapp}><Text>{avtale.title}</Text><TouchableHighlight onPress={() => {this.deleteCard(id)}}>
+            <Card style={styles.cards} key={id}>
+                <View style = {styles.slettKnapp}><Text style={styles.titleText} >{avtale.title}</Text><TouchableHighlight onPress={() => {this.deleteCard(id)}}>
                     <Icon name = 'delete' size={20} color='#37474f'/>
                 </TouchableHighlight></View>
-                <Text>{avtale.location}</Text>
-                <Text>{new Date(avtale.date).toLocaleString()}</Text>
+                <Text style={styles.text}>{avtale.location}</Text>
+                <Text style={styles.text}>{new Date(avtale.date).toLocaleString()}</Text>
                 <Button
-                    color = '#eceff1'
+                    color = '#cfd8dc'
                     backgroundColor='#37474f'
-                    buttonStyle={{borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 0}}
+                    buttonStyle={{borderRadius: 0, marginLeft: 0, marginRight: 0, marginTop: 10}}
                     title='VIEW MAP'
                     //Navigating to the map with the address to the appointment
                     onPress={() => {navigation.navigate('MapScreen', {
@@ -138,8 +138,8 @@ class Appointment extends React.Component {
             </Card>
         ));
         return (
-            <ScrollView>
-            <View>
+            <ScrollView style = {styles.scrolls}>
+            <View >
                 {avtaleKort}
             </View>
             </ScrollView>
@@ -149,17 +149,27 @@ class Appointment extends React.Component {
 
 
 const styles = StyleSheet.create({
-    Button: {
-        flex: 1,
-        backgroundColor: '#eceff1',
-        alignItems: 'center',
-        justifyContent: 'center',
-
-    },
     slettKnapp: {
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'space-between',
+        marginBottom: 10,
+    },
+    wrapperStyle: {
+        backgroundColor: '#37474f',
+        textAlign: 'right',
+    },
+    titleText: {
+        color: '#37474f',
+        fontSize: 15,
+        fontWeight: 'bold',
+    },
+    text:{
+        color: '#37474f',
+        fontSize: 15,
+    },
+    scrolls:{
+        backgroundColor: '#37474f',
     }
 });
 
