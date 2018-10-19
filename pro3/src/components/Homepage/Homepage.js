@@ -53,7 +53,7 @@ class Homepage extends React.Component {
                 
                <View style={styles.hr}/>
                     <View style={styles.scoreHolder}>
-                        <Text style={styles.scoreText}>Todo's completed:  {this.state.taskScore}</Text>
+                        <Text style={styles.scoreText}>Todo´s completed:  {this.state.taskScore}</Text>
                         <TouchableHighlight onPress={() => this.clearTaskScore()}>
                             <Icon name="times" size={24} color="#607D8B"/>
                         </TouchableHighlight>
