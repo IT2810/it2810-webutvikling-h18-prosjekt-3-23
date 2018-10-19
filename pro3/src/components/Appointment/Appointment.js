@@ -4,11 +4,13 @@ import {Button, Card} from 'react-native-elements'
 import NewCard from './NewCard.js';
 import ScoreManager from '../../utils/ScoreManager'
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import moment from 'moment'
+
 
 
 class Appointment extends React.Component {
 
-    //Header navigation
+    //Header navigation and style
     static navigationOptions = ({navigation}) => {
         return {
             title: 'My Appointments',
@@ -115,16 +117,19 @@ class Appointment extends React.Component {
 
     render() {
         const navigation = this.props.navigation;
+        let myFormatFunction = (format,date) =>{
+            return moment(date).format(format);
+        };
         const fremtidigeAvtaler = this.state.avtaler.filter(avtale =>
             new Date(avtale.date).getTime() > new Date()
-        )
+        );
         const avtaleKort = fremtidigeAvtaler.map((avtale, id) => (
-            <Card style={styles.cards} key={id}>
+            <Card key={id}>
                 <View style = {styles.slettKnapp}><Text style={styles.titleText} >{avtale.title}</Text><TouchableHighlight onPress={() => {this.deleteCard(id)}}>
                     <Icon name = 'delete' size={20} color='#37474f'/>
                 </TouchableHighlight></View>
-                <Text style={styles.text}>{avtale.location}</Text>
-                <Text style={styles.text}>{new Date(avtale.date).toLocaleString()}</Text>
+                <Text style={styles.text}>{avtale.address}</Text>
+                <Text style={styles.text}>{myFormatFunction("DD MMM YYYY, HH:mm",avtale.date)}</Text>
                 <Button
                     color = '#cfd8dc'
                     backgroundColor='#37474f'
@@ -132,7 +137,7 @@ class Appointment extends React.Component {
                     title='VIEW MAP'
                     //Navigating to the map with the address to the appointment
                     onPress={() => {navigation.navigate('MapScreen', {
-                      address: avtale.location
+                      address: avtale.address
                     })}}
                 />
             </Card>
@@ -153,20 +158,21 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'space-between',
-        marginBottom: 10,
-    },
-    wrapperStyle: {
-        backgroundColor: '#37474f',
-        textAlign: 'right',
+        marginBottom: 8,
     },
     titleText: {
         color: '#37474f',
         fontSize: 15,
         fontWeight: 'bold',
+        marginLeft: 8,
+        marginRight: 8,
     },
     text:{
         color: '#37474f',
         fontSize: 15,
+        marginBottom: 2,
+        marginLeft: 8,
+        marginRight: 8,
     },
     scrolls:{
         backgroundColor: '#37474f',
