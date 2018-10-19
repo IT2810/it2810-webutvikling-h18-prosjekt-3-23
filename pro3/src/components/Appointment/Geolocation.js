@@ -52,6 +52,7 @@ class Geolocation extends Component{
         }
     };
 
+  //Source: https://docs.expo.io/versions/latest/sdk/location
   componentWillMount() {
     //Checking if its an android emulator, because finding location dosn't work there
     if (Platform.OS === 'android' && !Constants.isDevice) {
@@ -64,13 +65,14 @@ class Geolocation extends Component{
     }
   }
 
+
   componentDidMount() {
     this._getLocationAsync();
     this._getAddressLocationAsync();
   }
 
-
-  //Function asking for permission to get location (of device), and getting it if it's not denied
+  //Source: https://docs.expo.io/versions/latest/sdk/location
+  //Function asking for permission to get location (of device) and getting it if it's not denied
   _getLocationAsync = async () => {
     let { status } = await Permissions.askAsync(Permissions.LOCATION);
     if (status !== 'granted') {
@@ -80,7 +82,6 @@ class Geolocation extends Component{
     }
 
     this.setRegion();
-
   }
 
   //Function setting the state(region) to the users/device region
@@ -127,9 +128,8 @@ class Geolocation extends Component{
           style={styles.mapStyle}
           region = {this.state.region}
           provider={MapView.PROVIDER_GOOGLE}
-          //Making the users/device location visible and give the ability to follow when the device moves
-          showsUserLocation={true}
-          followUserLocation={true}
+          showsUserLocation={true} //Making the users/device location visible
+          followUserLocation={true} //Give the ability to follow when the device moves
         >
 
             <Marker
@@ -148,14 +148,6 @@ class Geolocation extends Component{
 }
 
 export default Geolocation;
-
-Geolocation.propTypes = {
-  address: PropTypes.string
-};
-
-Geolocation.defaultProps = {
-  address: 'Fjordgata 1 Trondheim'
-};
 
 const styles = StyleSheet.create({
   mapStyle:{

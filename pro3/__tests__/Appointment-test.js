@@ -3,7 +3,7 @@ import React from 'react';
 import renderer from 'react-test-renderer';
 import Appointment from '../src/components/Appointment/Appointment';
 import MockAsyncStorage from 'mock-async-storage';
-import { AsyncStorage as storage } from 'react-native'
+import { AsyncStorage as storage } from 'react-native';
 
 const navigationEx = { addListener: jest.fn() };
 
