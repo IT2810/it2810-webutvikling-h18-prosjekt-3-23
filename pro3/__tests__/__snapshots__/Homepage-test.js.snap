@@ -59,7 +59,7 @@ exports[`should render corrrectly 1`] = `
         }
       }
     >
-      Todo's completed:  
+      Todo´s completed:  
       0
     </Text>
     <View
