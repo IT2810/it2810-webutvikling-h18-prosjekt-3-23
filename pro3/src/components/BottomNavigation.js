@@ -3,10 +3,10 @@ import { createMaterialBottomTabNavigator } from 'react-navigation-material-bott
 import Icon from 'react-native-vector-icons/FontAwesome';
 import HomePage from './Homepage/Homepage';
 import TodoPage from './Todo/TodoPage';
-import AppStackNavigator from './AppointmentStackNav';
+import AppStackNavigator from './Appointment/AppointmentStackNav';
 
 
-/*A material-design themed tab bar on the bottom of the screen that lets you switch between different screens.*/
+/*A material-design themed tab bar on the bottom of the page that lets you switch between different screens.*/
 export default createMaterialBottomTabNavigator ({
     //Route configurations
     Home:{screen: HomePage,

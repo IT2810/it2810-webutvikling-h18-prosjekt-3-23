@@ -3,6 +3,7 @@ import { StyleSheet, Text, View, Platform, Dimensions, TouchableHighlight } from
 import { Constants, Location, Permissions, MapView } from 'expo';
 import { Marker } from 'react-native-maps';
 import Icon from 'react-native-vector-icons/MaterialIcons'
+import PropTypes from 'prop-types';
 
 //Constants for the latitudeDelta and longitudeDelta (and for calculating the longitudeDelta)
 const {width, height} = Dimensions.get('window')
@@ -51,6 +52,7 @@ class Geolocation extends Component{
         }
     };
 
+  //Source: https://docs.expo.io/versions/latest/sdk/location
   componentWillMount() {
     //Checking if its an android emulator, because finding location dosn't work there
     if (Platform.OS === 'android' && !Constants.isDevice) {
@@ -63,13 +65,14 @@ class Geolocation extends Component{
     }
   }
 
+
   componentDidMount() {
     this._getLocationAsync();
     this._getAddressLocationAsync();
   }
 
-
-  //Function asking for permission to get location (of device), and getting it if it's not denied
+  //Source: https://docs.expo.io/versions/latest/sdk/location
+  //Function asking for permission to get location (of device) and getting it if it's not denied
   _getLocationAsync = async () => {
     let { status } = await Permissions.askAsync(Permissions.LOCATION);
     if (status !== 'granted') {
@@ -79,11 +82,10 @@ class Geolocation extends Component{
     }
 
     this.setRegion();
-
   }
 
   //Function setting the state(region) to the users/device region
-  setRegion(){
+  setRegion = () => {
     navigator.geolocation.getCurrentPosition((position) => {
       let deviceLat = parseFloat(position.coords.latitude)
       let deviceLong = parseFloat(position.coords.longitude)
@@ -97,21 +99,18 @@ class Geolocation extends Component{
 
       this.setState({region: region})
     })
-  }
+  };
 
   //Function getting the coords for the appointment location
   _getAddressLocationAsync = async () => {
     //Constant getting the address from the cards in the appointment-page
     const appointmentLoc = this.props.navigation.state.params.address
     const { longitude, latitude } = (await Location.geocodeAsync(appointmentLoc))[0];
-    this. setState({addressLat: latitude, addressLng: longitude});
+    this.setState({addressLat: latitude, addressLng: longitude});
   }
 
 
   render() {
-    console.log("REGION: "+JSON.stringify(this.state.region));
-    console.log("Stateaddress: " + this.state.addressLat +", "+ this.state.addressLng);
-
     //If it occurs an error while trying to find location, we show the errorMessage to the user and not the map
     let text = '';
     if (this.state.errorMessage) {
@@ -129,19 +128,18 @@ class Geolocation extends Component{
           style={styles.mapStyle}
           region = {this.state.region}
           provider={MapView.PROVIDER_GOOGLE}
-          //Making the users/device location visible and ability to follow when it moves
-          showsUserLocation={true}
-          followUserLocation={true}
+          showsUserLocation={true} //Making the users/device location visible
+          followUserLocation={true} //Give the ability to follow when the device moves
         >
 
-          <Marker
-            //Marker and coordinates for the appointment
-            title={appointmentLocation}
-            coordinate={{
-              latitude: this.state.addressLat,
-              longitude: this.state.addressLng,
-            }}
-          />
+            <Marker
+              //Marker and coordinates for the appointment
+              title={appointmentLocation}
+              coordinate={{
+                latitude: this.state.addressLat,
+                longitude: this.state.addressLng,
+              }}
+            />
 
         </MapView>
     );

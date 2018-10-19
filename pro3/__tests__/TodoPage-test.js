@@ -1,5 +1,5 @@
-import 'react-native';
-import React from 'react';
+import "react-native";
+import React from "react";
 import renderer from 'react-test-renderer';
 import TodoPage from '../src/components/Todo/TodoPage';
 import MockAsyncStorage from 'mock-async-storage';

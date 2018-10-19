@@ -10,23 +10,23 @@
     "test": "node_modules/.bin/jest"
   },
   "dependencies": {
+    "babel-preset-react-native": "^4.0.1",
     "expo": "^30.0.1",
+    "jest-expo": "^30.0.0",
+    "mock-async-storage": "latest",
     "moment": "^2.22.2",
+    "prop-types": "^15.6.2",
     "react": "16.3.1",
     "react-native": "https://github.com/expo/react-native/archive/sdk-30.0.0.tar.gz",
     "react-native-elements": "^0.19.1",
     "react-native-form-builder": "^1.0.15",
     "react-native-form-composer": "^1.1.5",
-    "tcomb-form-native": "^0.6.19",
-    "babel-preset-react-native": "^4.0.1",
     "react-native-maps": "^0.21.0",
     "react-native-paper": "^2.0.1",
     "react-navigation": "^2.17.0",
     "react-navigation-material-bottom-tabs": "^0.4.0",
     "react-timer-mixin": "^0.13.4",
-    "jest-expo": "^30.0.0",
-    "mock-async-storage": "latest",
-    "prop-types": "latest"
+    "tcomb-form-native": "^0.6.19"
   },
   "jest": {
     "preset": "jest-expo",
