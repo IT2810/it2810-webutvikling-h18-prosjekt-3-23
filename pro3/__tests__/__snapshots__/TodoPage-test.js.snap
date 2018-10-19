@@ -28,7 +28,7 @@ exports[`should render corrrectly 1`] = `
       }
     }
   >
-    My todo's
+    Todo´s
   </Text>
   <View
     width="100%"
