@@ -2,6 +2,7 @@ import { AsyncStorage } from 'react-native';
 
 export default ScoreManager = {
 
+      //Saves the taskScore to AsyncStorage
       async saveTaskScore(score) {
         try {
           await AsyncStorage.setItem('TASKSCORE', score);
@@ -11,6 +12,7 @@ export default ScoreManager = {
         }
       },
 
+      //Saves the appointments score to AsyncStorage
       async saveAppScore(score) {
         try {
             await AsyncStorage.setItem('APPSCORE', score);

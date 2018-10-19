@@ -12,12 +12,10 @@ class Homepage extends React.Component {
             appScore : 0
         }
 
-
+        //Updates the state of taskScore and appScore everytime the HomePage is in focus (in the navigation-menu)
         this.props.navigation.addListener("didFocus", () => {this.retrieveTaskScoreAsync()})
         this.props.navigation.addListener("didFocus", () => {this.retrieveAppScoreAsync()})
-        //console.log('porps i const', this.props)
     }
-
 
 
     componentDidMount(){
@@ -49,19 +47,24 @@ class Homepage extends React.Component {
     render() {
         return (
             <View style={styles.container}>
-               <Image style={{height:180, width:220}} source={require('./logo.png')} />
-               <View style={styles.scoreHolder}>
-                   <Text style={styles.scoreText}>Todo's completed: {this.state.taskScore}</Text>
-                   <TouchableHighlight onPress={() => this.clearTaskScore()}>
-                       <Icon name="times-circle" size={24} color="#607D8B"/>
-                   </TouchableHighlight>
+                <View style={styles.imageHolder}> 
+                    <Image style={{height:180, width:220}} source={require('./logo.png')} />
                 </View>
+                
+               <View style={styles.hr}/>
+                    <View style={styles.scoreHolder}>
+                        <Text style={styles.scoreText}>Todo's completed:  {this.state.taskScore}</Text>
+                        <TouchableHighlight onPress={() => this.clearTaskScore()}>
+                            <Icon name="times" size={24} color="#607D8B"/>
+                        </TouchableHighlight>
+                    </View>
+
+                <View style={styles.hr}/>
+                    <View style={styles.scoreHolder}>
+                        <Text style={styles.scoreText}>Appointments made: {this.state.appScore}</Text>
+                    </View>
                 <View style={styles.hr}/>
 
-                <View style={styles.scoreHolder}>
-                   <Text style={styles.scoreText}>Appointments made: {this.state.appScore}</Text>
-                </View>
-                <View style={styles.hr}/>
             </View>
         );
     }
@@ -78,21 +81,23 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
     },
     scoreText: {
-        color: '#eceff1',
+        color: '#CFD8DC',
         fontSize: 24
     },
     scoreHolder : {
         flexDirection:"row",
         justifyContent:"space-between",
         alignItems: "center",
-        width: "70%",
-        paddingTop: 20
+        width: "70%"
     },
     hr: {
         height: 1,
         backgroundColor: "#607D8B",
-        width: "70%",
-        marginTop: 5
+        width: "100%",
+        margin: 20
+    },
+    imageHolder : {
+        margin: 25
     }
 
 });
