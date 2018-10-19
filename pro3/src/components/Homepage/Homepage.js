@@ -15,7 +15,7 @@ class Homepage extends React.Component {
 
         this.props.navigation.addListener("didFocus", () => {this.retrieveTaskScoreAsync()})
         this.props.navigation.addListener("didFocus", () => {this.retrieveAppScoreAsync()})
-        console.log('porps i const', this.props)
+        //console.log('porps i const', this.props)
     }
 
 
@@ -73,7 +73,7 @@ export default Homepage;
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#263238',
+        backgroundColor: '#37474f',
         alignItems: 'center',
         justifyContent: 'center',
     },

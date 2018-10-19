@@ -11,12 +11,12 @@ class Appointment extends React.Component {
     //Header navigation
     static navigationOptions = ({navigation}) => {
         return {
-            title: 'My Appoinments',
+            title: 'My Appointments',
             headerStyle: {
                 backgroundColor: '#37474f',
             },
             headerTitleStyle: {
-                color: '#eceff1'
+                color: '#cfd8dc'
             },
             headerRight: (
                 <TouchableHighlight onPress={() => {navigation.navigate('NewCard')}}>
@@ -31,11 +31,12 @@ class Appointment extends React.Component {
         this.state = {
             avtaler: [],
             score : 0
-        }
+        };
         this.retrieveItems();
         this.props.navigation.addListener("didFocus", () => {this.getAppScoreAsync()})
     }
 
+    //Retrieves all cards/appointments from asyncstorage.
     retrieveItems() {
         try{
             AsyncStorage.getItem("Appointments").then(res => {
@@ -45,7 +46,7 @@ class Appointment extends React.Component {
                     this.setState({avtaler: JSON.parse(res)})}
             })
         }catch (error) {
-            console.log(error.message);
+            console.error(error.message);
         }
     }
 
@@ -54,7 +55,7 @@ class Appointment extends React.Component {
         this.storeItem(nyAvtale)
     }
 
-
+    //Saves a new appointment(card) to asyncstorage.
     async storeItem(item) {
         try{
             this.setState(
@@ -62,39 +63,29 @@ class Appointment extends React.Component {
                 AsyncStorage.setItem("Appointments", JSON.stringify(this.state.avtaler))
             }
             )
-            let oldScore = this.state.score
-            let newScore = oldScore + 1
-            this.setState({score : newScore})
-            ScoreManager.saveAppScore(newScore.toString())
+            this.increaseScore();
 
         } catch (error) {
-            console.log(error.message)
+            console.error(error.message)
         }
     };
 
+    //Deletes the chosen card from appointments.
     async deleteCard(id){
         const currentAppointments = this.state.avtaler;
-        //console.log('currentApp',currentAppointments);
-        //console.log('id',id);
         for (let i = 0; i < currentAppointments.length; i++) {
-            console.log('index', i)
             if(i === id) {
                 currentAppointments.splice(i, 1);
-                console.log('splicde', currentAppointments)
                 this.setState({avtaler: currentAppointments})
-                console.log('state etter delete', this.state)
             }
         } AsyncStorage.setItem("Appointments", JSON.stringify(currentAppointments));
         this.retrieveItems();
-        let oldScore = this.state.score
-        if(oldScore > 0 ){
-            let newScore = oldScore - 1
-            this.setState({score : newScore})
-            ScoreManager.saveAppScore(newScore.toString())
-        }
-
+        this.decreaseScore(this.state.score);
     }
 
+    //The following code handles score in the appointment-page
+    
+    //Retrieves the score to be increased/decreased
     getAppScoreAsync = async () => {
         let score = await AsyncStorage.getItem("APPSCORE");
         if (score == null) {
@@ -105,23 +96,39 @@ class Appointment extends React.Component {
         }
         }
 
+    //Increases the score by 1 when appointment is made --> is called in storeItem()
+    increaseScore(){
+        let oldScore = this.state.score
+            let newScore = oldScore + 1
+            this.setState({score : newScore})
+            ScoreManager.saveAppScore(newScore.toString())
+    }
+
+    //Decreases the score by 1 when appointment is deleted --> is called in deleteCard()
+    decreaseScore(oldScore){
+        if(oldScore > 0 ){
+            let newScore = oldScore - 1
+            this.setState({score : newScore})
+            ScoreManager.saveAppScore(newScore.toString())
+        }
+    }
+
     render() {
-        console.log("score:" + this.state.score)
         const navigation = this.props.navigation;
         const fremtidigeAvtaler = this.state.avtaler.filter(avtale =>
             new Date(avtale.date).getTime() > new Date()
         )
         const avtaleKort = fremtidigeAvtaler.map((avtale, id) => (
-            <Card key={id}>
-                <View style = {styles.slettKnapp}><Text>{avtale.title}</Text><TouchableHighlight onPress={() => {this.deleteCard(id)}}>
+            <Card style={styles.cards} key={id}>
+                <View style = {styles.slettKnapp}><Text style={styles.titleText} >{avtale.title}</Text><TouchableHighlight onPress={() => {this.deleteCard(id)}}>
                     <Icon name = 'delete' size={20} color='#37474f'/>
                 </TouchableHighlight></View>
-                <Text>{avtale.location}</Text>
-                <Text>{new Date(avtale.date).toLocaleString()}</Text>
+                <Text style={styles.text}>{avtale.location}</Text>
+                <Text style={styles.text}>{new Date(avtale.date).toLocaleString()}</Text>
                 <Button
-                    color = '#eceff1'
+                    color = '#cfd8dc'
                     backgroundColor='#37474f'
-                    buttonStyle={{borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 0}}
+                    buttonStyle={{borderRadius: 0, marginLeft: 0, marginRight: 0, marginTop: 10}}
                     title='VIEW MAP'
                     //Navigating to the map with the address to the appointment
                     onPress={() => {navigation.navigate('MapScreen', {
@@ -131,8 +138,8 @@ class Appointment extends React.Component {
             </Card>
         ));
         return (
-            <ScrollView>
-            <View>
+            <ScrollView style = {styles.scrolls}>
+            <View >
                 {avtaleKort}
             </View>
             </ScrollView>
@@ -142,17 +149,27 @@ class Appointment extends React.Component {
 
 
 const styles = StyleSheet.create({
-    Button: {
-        flex: 1,
-        backgroundColor: '#eceff1',
-        alignItems: 'center',
-        justifyContent: 'center',
-
-    },
     slettKnapp: {
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'space-between',
+        marginBottom: 10,
+    },
+    wrapperStyle: {
+        backgroundColor: '#37474f',
+        textAlign: 'right',
+    },
+    titleText: {
+        color: '#37474f',
+        fontSize: 15,
+        fontWeight: 'bold',
+    },
+    text:{
+        color: '#37474f',
+        fontSize: 15,
+    },
+    scrolls:{
+        backgroundColor: '#37474f',
     }
 });
 

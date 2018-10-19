@@ -5,7 +5,6 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 
 export default class TodoList extends Component {
 
-
   render() {
     return (
       <FlatList
