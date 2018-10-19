@@ -35,7 +35,6 @@ For å løse oppgaven om å lage en “Personal Information and Motivation Manag
 <a name="innhold"></a>
 ## Krav til innhold og funksjonalitet
 
-Krav til innhold og funksjonalitet
 I appen kan man legge til avtaler og todos. Vi har lagt inn en automatisk oppdatering av poengscore når brukeren oppretter nye avtaler og fullfører todos for å øke motivasjonen til brukeren. Ettersom at dette bare er en prototype, har vi valgt å avgrense appen til det som er nevnt. I en ferdig app ville vi lagt til “trofeer” for høy poengscore, eller en “highscore”-liste som kommuniserer med andre brukere, for å gjøre det enda mer motiverende. Vi ville også hatt med muligheten til å se en oversikt over ferdige todo’s og tidligere avtaler. I prototypen forsvinner todo’s-ene når de blir fullført og avtalene når man når datoen for avtalen. 
 
 Alle todo’s, poengscore og avtaler lagres med all informasjon i AsyncStorage, slik at data tas vare på selv om appen avsluttes og startes på nytt. Dersom Expo har fått tillatelse til å bruke enhetens lokasjon blir også dette lagret i AsyncStorage, slik at man ikke trenger å godkjenne dette hver gang.  
