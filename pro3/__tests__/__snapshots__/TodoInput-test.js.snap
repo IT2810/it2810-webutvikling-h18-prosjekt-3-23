@@ -1,0 +1,37 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<View
+  width="100%"
+>
+  <TextInput
+    allowFontScaling={true}
+    placeholder="+ Add a new todo"
+    placeholderTextColor="rgba(144, 164, 174, 0.685)"
+    returnKeyLabel="done"
+    returnKeyType="done"
+    underlineColorAndroid="transparent"
+  />
+  <View>
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      ellipsizeMode="tail"
+    >
+       Click on 
+    </Text>
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      ellipsizeMode="tail"
+    />
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      ellipsizeMode="tail"
+    >
+       when task is completed
+    </Text>
+  </View>
+</View>
+`;
