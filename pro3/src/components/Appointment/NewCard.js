@@ -8,12 +8,14 @@ import moment from 'moment'
 
 const Form = t.form.Form;
 
+//defines form
 const CardInfo = t.struct({
     Title: t.String,
-    Location: t.String,
+    Address: t.String,
     Dato: t.Date,
 });
 
+//date format
 let myFormatFunction = (format,date) =>{
     return moment(date).format(format);
 }
@@ -37,7 +39,7 @@ class NewCard extends React.Component {
 
     static navigationOptions = ({navigation}) => {
         return {
-            title: 'New Appoinment',
+            title: 'New Appointment',
             headerTintColor: '#eceff1',
             headerStyle: {
                 backgroundColor: '#37474f',
