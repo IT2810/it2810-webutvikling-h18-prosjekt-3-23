@@ -1,6 +1,6 @@
 import MockAsyncStorage from 'mock-async-storage';
 import { AsyncStorage as storage } from 'react-native'
-import ScoreManager from '../src/utils/ScoreManager'
+import TaskManager from '../src/utils/TaskManager'
 
 
 //Implements mocks
@@ -12,17 +12,9 @@ const mock = () => {
 
 describe('storage', () => {
     test('saveTaskScore should store in AsyncStorage with no errors', () => {
-        ScoreManager.saveTaskScore("").then((error) => {
-            expect(error).toEqual(null);
-            expect(storage.setItem).toBeCalledWith('test', JSON.stringify(""));
-        });
-    });
-
-    test('saveAppScore should store in AsyncStorage with no errors', () => {
-        ScoreManager.saveAppScore("").then((error) => {
+        TaskManager.save("").then((error) => {
             expect(error).toEqual(null);
             expect(storage.setItem).toBeCalledWith('test', JSON.stringify(""));
         });
     });
 });
-

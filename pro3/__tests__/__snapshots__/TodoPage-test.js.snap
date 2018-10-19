@@ -5,11 +5,11 @@ exports[`should render corrrectly 1`] = `
   style={
     Object {
       "alignItems": "center",
-      "backgroundColor": "#263238",
+      "backgroundColor": "#37474f",
       "flex": 1,
       "justifyContent": "center",
       "padding": 10,
-      "paddingTop": 20,
+      "paddingTop": 0,
       "width": "100%",
     }
   }
@@ -21,13 +21,14 @@ exports[`should render corrrectly 1`] = `
     style={
       Object {
         "color": "#CFD8DC",
-        "fontSize": 28,
+        "fontSize": 17,
+        "fontWeight": "bold",
         "margin": 5,
-        "paddingTop": 10,
+        "paddingTop": 25,
       }
     }
   >
-    Todo's
+    My todo's
   </Text>
   <View
     width="100%"
@@ -37,12 +38,12 @@ exports[`should render corrrectly 1`] = `
       onChangeText={[Function]}
       onSubmitEditing={[Function]}
       placeholder="+ Add a new todo"
-      placeholderTextColor="rgba(96, 125, 139, 0.731)"
+      placeholderTextColor="rgba(144, 164, 174, 0.685)"
       returnKeyLabel="done"
       returnKeyType="done"
       style={
         Object {
-          "borderColor": "#78909c",
+          "borderColor": "#90A4AE",
           "borderWidth": 1.8,
           "color": "#CFD8DC",
           "fontSize": 24,
@@ -70,7 +71,7 @@ exports[`should render corrrectly 1`] = `
         ellipsizeMode="tail"
         style={
           Object {
-            "color": "#607D8B",
+            "color": "#90A4AE",
             "fontSize": 18,
           }
         }
@@ -88,7 +89,7 @@ exports[`should render corrrectly 1`] = `
         ellipsizeMode="tail"
         style={
           Object {
-            "color": "#607D8B",
+            "color": "#90A4AE",
             "fontSize": 18,
           }
         }

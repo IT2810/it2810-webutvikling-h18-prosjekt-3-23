@@ -7,7 +7,7 @@ exports[`renders correctly 1`] = `
   <TextInput
     allowFontScaling={true}
     placeholder="+ Add a new todo"
-    placeholderTextColor="rgba(96, 125, 139, 0.731)"
+    placeholderTextColor="rgba(144, 164, 174, 0.685)"
     returnKeyLabel="done"
     returnKeyType="done"
     underlineColorAndroid="transparent"
