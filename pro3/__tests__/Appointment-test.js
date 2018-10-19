@@ -16,13 +16,6 @@ const mock = () => {
     jest.mock('AsyncStorage', () => mockImpl)
 };
 
-//Sjekker at komponenten rendrer riktig, og kjører en snapshot test.
-it('should render corrrectly', async () => {
-    mock();
-    expect (appoints).toMatchSnapshot();
-    jest.unmock('AsyncStorage');
-});
-
 describe('score', () => {
     test('setState is called when increaseScore', async () => {
         const instance = appoints.root.instance;
