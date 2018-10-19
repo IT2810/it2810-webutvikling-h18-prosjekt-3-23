@@ -2,21 +2,23 @@ import { AsyncStorage } from 'react-native';
 
 export default ScoreManager = {
 
-    saveTaskScore(score) {
+      //Saves the taskScore to AsyncStorage
+      async saveTaskScore(score) {
         try {
-            AsyncStorage.setItem('TASKSCORE', score);
+          await AsyncStorage.setItem('TASKSCORE', score);
         } catch (error) {
           // Error retrieving data
-          console.log(error.message);
+          console.error(error.message);
         }
       },
 
-      saveAppScore(score) {
+      //Saves the appointments score to AsyncStorage
+      async saveAppScore(score) {
         try {
-            AsyncStorage.setItem('APPSCORE', score);
+            await AsyncStorage.setItem('APPSCORE', score);
         } catch (error) {
           // Error retrieving data
-          console.log(error.message);
+          console.error(error.message);
         }
       }
 }

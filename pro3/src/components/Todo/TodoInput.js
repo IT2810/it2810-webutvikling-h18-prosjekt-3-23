@@ -15,12 +15,12 @@ export default class TodoInput extends Component {
                         placeholder="+ Add a new todo"
                         returnKeyType="done"
                         returnKeyLabel="done"
-                        placeholderTextColor="rgba(96, 125, 139, 0.731)"
+                        placeholderTextColor="rgba(144, 164, 174, 0.685)"
                         underlineColorAndroid='transparent'
                 />
                 <View style = {this.props.listTextView}> 
                     <Text style = {this.props.listText}> Click on </Text>
-                    <Icon name="check" color="#607D8B" size={18}/>  
+                    <Icon name="check" color="#90A4AE" size={18}/>  
                     <Text style= {this.props.listText}> when task is completed</Text> 
                 </View>
             </View>

@@ -21,6 +21,7 @@ class TodoPage extends Component {
     };
 
     this.deleteTask = this.deleteTask.bind(this);
+    
     //Updates the state of score everytime the TodoPage is in focus (in the navigation-menu)
     //So that the score-counter doesn't use a wrong/not updated score 
     this.props.navigation.addListener("didFocus", () => {this.getTaskScoreAsync()})
@@ -53,25 +54,21 @@ class TodoPage extends Component {
       ScoreManager.saveTaskScore(newScore.toString());
     }
 
-    checkIfEmpty(){
-      if(this.state.text.trim().length > 0){
-        return true;
-      }
-    }
-
-
+  
   //Add a task
   addTask = () => {
-    //Checks if a new text-input is submitted
-    //let notEmpty = this.state.text.trim().length > 0;
 
-    if (this.checkIfEmpty()) {
+    //Checks if a new text-input is submitted
+    let notEmpty = this.state.text.trim().length > 0;
+
+    if (notEmpty) {
       this.setState(
         prevState => {
           let { tasks, text } = prevState;
           return {
             //Adds the text from the inputfield to the task-array
             tasks: tasks.concat({ key: tasks.length.toString(), text: text }),
+
             //Sets the state of text to be an empty string again
             text : ""
           };
@@ -96,6 +93,7 @@ class TodoPage extends Component {
       //Saves new state in AsyncStorage
       () => TaskManager.save(this.state.tasks)
     );
+    //Increases the taskscore
     this.increaseScore();
     return true;
   };
@@ -143,9 +141,9 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "#263238",
+    backgroundColor: "#37474f",
     padding: 10,
-    paddingTop: 20,
+    paddingTop: 0,
     width: "100%"
   },
   list: {
@@ -168,7 +166,7 @@ const styles = StyleSheet.create({
   },
   textInput: {
     padding: 5,
-    borderColor: "#78909c",
+    borderColor: "#90A4AE",
     borderWidth: 1.8,
     width: "100%",
     color: "#CFD8DC",
@@ -176,19 +174,21 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     marginTop: 10,
   },
-  heading : {
-    fontSize: 28,
-    color: "#CFD8DC",
-    margin: 5,
-    paddingTop: 10
-  },
   listTextView : {
     flexDirection:"row",
     marginBottom: 5,
     marginTop: 5
   },
   listText : {
-    color: "#607D8B",
+    color: "#90A4AE", 
     fontSize: 18
-  }
+  },
+  heading : {
+    fontSize: 17,
+    color: "#CFD8DC",
+    margin: 5,
+    paddingTop: 25,
+    fontWeight: "bold"
+  },
 });
+
