@@ -34,11 +34,30 @@ Dette er en online utstilling med brukerstyrte kombinasjoner av av lyd, bilde og
 <a name="teknologi"></a>
 ## Krav til bruk av teknologi 
 
+Prosjektet ble satt opp med expo-cli og skriptet expo init, ved å følge instruksjonene fra introforelesningen til prosjekt 3. Appen bruker AsyncStorage, og som tredjepartskomponenter og biblioteker har vi bruk “React Navigation” (createMaterialBottomNavigator og createStackNavigator), “React Native Elements” (Card, Button) og “tcomb-form-native” for inputskjemaet på NewAppointment-siden. 
+
+Expo API’et har vi brukt til å få opp kartet (MapView), spørre om tillatelse til å finne enhetens lokasjon (Permissions) og til å finne lokasjonen til enheten (Location).
+
+Applikasjonen fungerer på både ios og android, og dette er noe vi har systematisk testet gjennom hele prosjektet. 
+
 <b>Git og issues</b>
+
+I prosjektet har vi dekomponert oppgaven i mindre issues på Github. Disse har vi organisert ved hjelp av GitHub’s Project-funksjonalitet, slik at vi har hatt god oversikt over fremgangen i prosjektet. Commit’s har vært knyttet til issues, med mindre det har vært små endringer som har påvirket flere issues. Alle pull-requests har også blitt knyttet opp til issues, og branchene har blitt slettet jevnlig etter merge for å holde git ryddig. Denne organiseringen av underoppgaver og kodedeling, samt systematiseringen av prosjekt-fremgangen på GitHub har ført til bedre kommunikasjon innad i gruppa.
+
+   <img width="600" alt="Prosjekt" src="https://user-images.githubusercontent.com/22234642/47218883-7fb26200-d3ad-11e8-889a-543492b73729.png">
 
 
 <a name="testing"></a>
 ## Testing
+
+Den største utfordringen vi hadde i prosjektet var testing med jest. For det første hadde vi en del problemer med oppsettet, og det var kjedelig at det ikke fungerte på windows før et godt stykke ut i prosjektet. Dette førte til at vi kom litt sent i gang med testing. Videre er dessverre ikke Jest tilstrekkelig for å teste hele applikasjonen vår alene. 
+
+Likevel føler vi at testene vi har laget er et godt grunnlag for videre testing ved et ferdig produkt. Vi har hovedsakelig testet at de viktigste funksjonene i hovedfilene blir kalt, og fokusert mest på å teste de funksjonene som bruker AsyncStorage. Vi har også brukt snapshot-testing. 
+
+Dessverre fikk vi ikke testet kart-delen (geolocation.js) av prosjektet med jest, kun med brukertesting. Dette er fordi det viste seg å være vanskelig å mocke markøren som ble brukt inne i MapViewet.
+
+Som kompensasjon for at disse testene ikke ble helt optimale har vi hatt ekstra fokus på brukertesting. Gjennom hele prosjektet har vi testet hver del av applikasjonen på ios og android før de har blitt erklært ferdige. Vi har gått ut i fra at applikasjonen skal fungere på iPhoner og android 8.0 og nyere. 
+
 
 <a name="losninger"></a>
 ## Valg og løsninger
