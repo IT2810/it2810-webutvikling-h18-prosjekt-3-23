@@ -32,7 +32,7 @@ describe('score', () => {
         expect(mockSetState).toHaveBeenCalled();
     });
 
-    test('should change state when updateTodo is called', () => {
+    test('should change state when decreaseScore is called', () => {
       const instance = appoints.root.instance;
       const mockSetState = jest.fn();
       instance.setState = mockSetState;
@@ -57,5 +57,14 @@ describe('storage', () => {
             expect(storage.setItem).toBeCalledWith('test', JSON.stringify({}));
         });
     });
+
+    test('getAppScoreAsync should set state with no errors', () => {
+        const instance = appoints.root.instance;
+        instance.getAppScoreAsync().then((error) => {
+            expect(error).toEqual(null);
+            expect(instance.setState()).toBeCalled();
+        });
+    });
+
 });
 

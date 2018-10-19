@@ -21,7 +21,6 @@ it('should render corrrectly', async () => {
     jest.unmock('AsyncStorage');
 });
 
-
 describe('score', () => {
     test('setState is called when clearScore', async () => {
         const instance = homepagee.root.instance;
