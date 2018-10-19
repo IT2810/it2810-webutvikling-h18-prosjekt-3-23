@@ -15,6 +15,9 @@ class Homepage extends React.Component {
         //Updates the state of taskScore and appScore everytime the HomePage is in focus (in the navigation-menu)
         this.props.navigation.addListener("didFocus", () => {this.retrieveTaskScoreAsync()})
         this.props.navigation.addListener("didFocus", () => {this.retrieveAppScoreAsync()})
+
+        this.retrieveAppScoreAsync();
+        this.retrieveTaskScoreAsync();
     }
 
 
@@ -26,13 +29,21 @@ class Homepage extends React.Component {
     //Retrieves the taskScore
     retrieveTaskScoreAsync = async () => {
         let taskScore = await AsyncStorage.getItem("TASKSCORE");
-        this.setState({taskScore : taskScore});
+        if (taskScore == null) {
+            this.setState({taskScore : 0});
+          } else {
+            this.setState({taskScore : taskScore});
+          }
         }
 
     //Retrieves the appointments score
     retrieveAppScoreAsync = async () => {
         let appScore = await AsyncStorage.getItem("APPSCORE");
-        this.setState({appScore : appScore})
+        if (appScore == null) {
+            this.setState({appScore : 0});
+          } else {
+            this.setState({appScore : appScore});
+          }
     }
 
     //Resets the taskScore back to zero
