@@ -59,7 +59,7 @@ exports[`should render corrrectly 1`] = `
         }
       }
     >
-      Todo´s completed:
+      Todo´s completed:  
       0
     </Text>
     <View
@@ -111,7 +111,7 @@ exports[`should render corrrectly 1`] = `
         }
       }
     >
-      Appointments made:
+      Appointments made: 
       0
     </Text>
   </View>
